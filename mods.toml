@@ -1,0 +1,6 @@
+version = 1
+
+[[mods]]
+modid = "examplemod"
+display_name = "Example Mod"
+enabled_formats = ["patchouli"]
