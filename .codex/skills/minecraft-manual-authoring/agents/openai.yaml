@@ -1,0 +1,6 @@
+interface:
+  display_name: "Minecraft Manual Authoring"
+  short_description: "Scaffold Minecraft manual manuscripts"
+  default_prompt: "Use $minecraft-manual-authoring to scaffold Patchouli manuscript files for a Minecraft mod manual."
+policy:
+  allow_implicit_invocation: true
