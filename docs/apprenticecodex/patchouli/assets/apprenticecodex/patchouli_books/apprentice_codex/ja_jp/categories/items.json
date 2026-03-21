@@ -1,0 +1,6 @@
+{
+  "name": "アイテム",
+  "description": "追加アイテムの説明をまとめるカテゴリです。今回は Patchouli のツリーサンプルとして、探索者の写本だけを配置しています。\n",
+  "icon": "apprenticecodex:explorers_codex",
+  "sortnum": 0
+}

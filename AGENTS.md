@@ -28,14 +28,26 @@
 ```text
 manuscripts/<modid>/patchouli/
   book.yml
-  categories/*.yml
-  entries/*.yml
-  pages/<entry_id>/*.md
+  locales/<locale>/
+    categories/*.yml
+    entries/**/*.yml
+    pages/<entry_id>/*.md
 ```
 
 - `pages/*.md` は YAML front matter と本文を持つ。
+- `book.yml` は共有メタデータを持ち、`locales` で生成対象 locale を列挙する。
 - 本文は当面 CommonMark 変換せず、Patchouli の `text` としてそのまま扱う。
 - `Modonomicon` への対応を意識しても、初期段階では強い抽象化を入れすぎない。
+
+- `Patchouli` の生成物は次の構成を前提とする。
+
+```text
+docs/<modid>/patchouli/
+  data/<namespace>/patchouli_books/<book_id>/book.json
+  assets/<namespace>/patchouli_books/<book_id>/<locale>/
+    categories/*.json
+    entries/**/*.json
+```
 
 ## 5. 変更時の優先順位
 
@@ -63,7 +75,7 @@ python -m uv run mod-manual build patchouli --mod <modid>
 ## 7. エージェント向け実務ルール
 
 - まず `mods.toml` を見て対象 MOD と有効形式を確認する。
-- `Patchouli` 作業では、`book.yml`、`categories`、`entries`、`pages` のどれを変えるかを明示する。
+- `Patchouli` 作業では、`book.yml`、`locales/<locale>/categories`、`locales/<locale>/entries`、`locales/<locale>/pages` のどれを変えるかを明示する。
 - ID を変更する場合は、参照元も合わせて確認する。
 - スキャフォールド追加時は、将来の手修正前提で読みやすいテンプレートを優先する。
 - `Modonomicon` のための構造を先回りして入れすぎず、必要になった時点で差分を増やす。

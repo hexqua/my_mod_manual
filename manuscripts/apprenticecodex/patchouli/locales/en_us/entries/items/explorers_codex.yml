@@ -1,0 +1,11 @@
+id: explorers_codex
+name: "Explorer's Codex"
+icon: apprenticecodex:explorers_codex
+category: items
+sortnum: 0
+read_by_default: true
+pages:
+  - type: spotlight
+    source: 00-spotlight.md
+  - type: text
+    source: 01-sample-role.md

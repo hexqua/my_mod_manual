@@ -1,5 +1,8 @@
+book_id: examplemod
+book_namespace: examplemod
 name: "Example Mod Manual"
 landing_text: |
   Welcome to the example manual.
 version: 1
-i18n: en_us
+locales:
+  - en_us

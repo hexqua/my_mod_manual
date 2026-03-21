@@ -4,3 +4,8 @@ version = 1
 modid = "examplemod"
 display_name = "Example Mod"
 enabled_formats = ["patchouli"]
+
+[[mods]]
+modid = "apprenticecodex"
+display_name = "Apprentice's Codex"
+enabled_formats = ["patchouli"]

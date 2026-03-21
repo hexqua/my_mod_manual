@@ -57,12 +57,14 @@ def build_parser() -> argparse.ArgumentParser:
     scaffold_category_parser.add_argument("modid")
     scaffold_category_parser.add_argument("category_id")
     scaffold_category_parser.add_argument("--name", required=True)
+    scaffold_category_parser.add_argument("--locale", default="en_us")
 
     scaffold_entry_parser = scaffold_subparsers.add_parser("entry", help="Create an entry and first page.")
     scaffold_entry_parser.add_argument("modid")
     scaffold_entry_parser.add_argument("entry_id")
     scaffold_entry_parser.add_argument("--category", required=True)
     scaffold_entry_parser.add_argument("--name", required=True)
+    scaffold_entry_parser.add_argument("--locale", default="en_us")
 
     return parser
 
@@ -95,9 +97,9 @@ def run_scaffold(root: Path, args: argparse.Namespace) -> int:
     if args.scaffold_target == "mod":
         created = scaffold_mod(root, args.modid, args.name)
     elif args.scaffold_target == "category":
-        created = [scaffold_category(root, args.modid, args.category_id, args.name)]
+        created = [scaffold_category(root, args.modid, args.category_id, args.name, args.locale)]
     elif args.scaffold_target == "entry":
-        created = scaffold_entry(root, args.modid, args.entry_id, args.category, args.name)
+        created = scaffold_entry(root, args.modid, args.entry_id, args.category, args.name, args.locale)
     else:
         raise ManualError(f"Unsupported scaffold target: {args.scaffold_target}")
 

@@ -1,0 +1,20 @@
+{
+  "name": "Explorer's Codex",
+  "icon": "apprenticecodex:explorers_codex",
+  "category": "apprenticecodex:items",
+  "sortnum": 0,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Explorer's Codex",
+      "item": "apprenticecodex:explorers_codex",
+      "text": "A spellbook tuned for travel and reconnaissance. It comes preloaded with utility spells that help with movement, scouting, and staying aware of your surroundings while exploring."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Sample Role",
+      "text": "This entry is the smallest sample of a standalone Patchouli book with an `Items` category and a concrete child entry beneath it. More equipment or spell entries can be added beside it later."
+    }
+  ]
+}

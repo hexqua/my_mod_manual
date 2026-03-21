@@ -1,0 +1,8 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.name",
+  "landing_text": "patchouli.apprenticecodex.apprentice_codex.landing_text",
+  "subtitle": "patchouli.apprenticecodex.apprentice_codex.subtitle",
+  "version": "0",
+  "use_resource_pack": true,
+  "model": "patchouli:book_brown"
+}
