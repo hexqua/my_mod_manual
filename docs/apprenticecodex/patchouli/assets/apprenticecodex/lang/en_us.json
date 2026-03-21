@@ -1,0 +1,9 @@
+{
+  "patchouli.apprenticecodex.apprentice_codex.category.items.name": "Items",
+  "patchouli.apprenticecodex.apprentice_codex.category.items.description": "This category groups item notes. For now it only contains Explorer's Codex as a simple Patchouli tree sample.\n",
+  "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.name": "Explorer's Codex",
+  "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.title": "Explorer's Codex",
+  "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.text": "A spellbook tuned for travel and reconnaissance. It comes preloaded with utility spells that help with movement, scouting, and staying aware of your surroundings while exploring.",
+  "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.01_sample_role.title": "Sample Role",
+  "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.01_sample_role.text": "This entry is the smallest sample of a standalone Patchouli book with an `Items` category and a concrete child entry beneath it. More equipment or spell entries can be added beside it later."
+}

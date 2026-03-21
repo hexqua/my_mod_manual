@@ -4,5 +4,6 @@
   "subtitle": "patchouli.apprenticecodex.apprentice_codex.subtitle",
   "version": "0",
   "use_resource_pack": true,
-  "model": "patchouli:book_brown"
+  "model": "patchouli:book_brown",
+  "i18n": true
 }

@@ -1,18 +1,18 @@
 {
-  "name": "First Steps",
+  "name": "patchouli.examplemod.examplemod.entry.first_steps.name",
   "category": "examplemod:getting_started",
   "icon": "minecraft:paper",
   "sortnum": 0,
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Welcome",
-      "text": "This repository keeps Patchouli manuscript sources under `manuscripts/`.\n\nEdit the YAML and Markdown there, then regenerate JSON into `docs/`."
+      "title": "patchouli.examplemod.examplemod.entry.first_steps.page.00_introduction.title",
+      "text": "patchouli.examplemod.examplemod.entry.first_steps.page.00_introduction.text"
     },
     {
       "type": "patchouli:text",
-      "title": "Next Steps",
-      "text": "Run `python -m uv run mod-manual validate` before building.\n\nWhen the output looks correct, copy the generated JSON into the target MOD repository by hand."
+      "title": "patchouli.examplemod.examplemod.entry.first_steps.page.01_next_steps.title",
+      "text": "patchouli.examplemod.examplemod.entry.first_steps.page.01_next_steps.text"
     }
   ]
 }

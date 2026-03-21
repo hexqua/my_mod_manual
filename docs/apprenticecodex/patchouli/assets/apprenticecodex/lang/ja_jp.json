@@ -1,0 +1,9 @@
+{
+  "patchouli.apprenticecodex.apprentice_codex.category.items.name": "アイテム",
+  "patchouli.apprenticecodex.apprentice_codex.category.items.description": "追加アイテムの説明をまとめるカテゴリです。今回は Patchouli のツリーサンプルとして、探索者の写本だけを配置しています。\n",
+  "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.name": "探索者の写本",
+  "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.title": "探索者の写本",
+  "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.text": "探索と索敵に向いた魔導書です。移動補助、周辺把握、探索支援に役立つ呪文があらかじめ収められており、冒険中の取り回しを重視した一冊になっています。",
+  "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.01_sample_role.title": "サンプル位置づけ",
+  "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.01_sample_role.text": "この entry は、独立した Patchouli book の `Items` カテゴリ配下に個別項目を置く最小サンプルです。今後は同じ形式で、装備や呪文の項目を横に増やせます。"
+}

@@ -1,6 +1,6 @@
 {
-  "name": "Items",
-  "description": "This category groups item notes. For now it only contains Explorer's Codex as a simple Patchouli tree sample.\n",
+  "name": "patchouli.apprenticecodex.apprentice_codex.category.items.name",
+  "description": "patchouli.apprenticecodex.apprentice_codex.category.items.description",
   "icon": "apprenticecodex:explorers_codex",
   "sortnum": 0
 }

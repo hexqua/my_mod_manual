@@ -1,11 +1,2 @@
 id: explorers_codex
 name: "探索者の写本"
-icon: apprenticecodex:explorers_codex
-category: items
-sortnum: 0
-read_by_default: true
-pages:
-  - type: spotlight
-    source: 00-spotlight.md
-  - type: text
-    source: 01-sample-role.md

@@ -1,5 +1,5 @@
 {
-  "name": "探索者の写本",
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.name",
   "icon": "apprenticecodex:explorers_codex",
   "category": "apprenticecodex:items",
   "sortnum": 0,
@@ -7,14 +7,14 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "title": "探索者の写本",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.title",
       "item": "apprenticecodex:explorers_codex",
-      "text": "探索と索敵に向いた魔導書です。移動補助、周辺把握、探索支援に役立つ呪文があらかじめ収められており、冒険中の取り回しを重視した一冊になっています。"
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.text"
     },
     {
       "type": "patchouli:text",
-      "title": "サンプル位置づけ",
-      "text": "この entry は、独立した Patchouli book の `Items` カテゴリ配下に個別項目を置く最小サンプルです。今後は同じ形式で、装備や呪文の項目を横に増やせます。"
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.01_sample_role.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.01_sample_role.text"
     }
   ]
 }

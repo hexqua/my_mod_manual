@@ -57,14 +57,14 @@ def build_parser() -> argparse.ArgumentParser:
     scaffold_category_parser.add_argument("modid")
     scaffold_category_parser.add_argument("category_id")
     scaffold_category_parser.add_argument("--name", required=True)
-    scaffold_category_parser.add_argument("--locale", default="en_us")
+    scaffold_category_parser.add_argument("--locale", help="Create a locale override instead of a shared source.")
 
     scaffold_entry_parser = scaffold_subparsers.add_parser("entry", help="Create an entry and first page.")
     scaffold_entry_parser.add_argument("modid")
     scaffold_entry_parser.add_argument("entry_id")
     scaffold_entry_parser.add_argument("--category", required=True)
     scaffold_entry_parser.add_argument("--name", required=True)
-    scaffold_entry_parser.add_argument("--locale", default="en_us")
+    scaffold_entry_parser.add_argument("--locale", help="Create a locale override instead of a shared source.")
 
     return parser
 
