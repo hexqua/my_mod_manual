@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.craftsmans_delight.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:craftsmans_delight",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.craftsmans_delight.page.00_spotlight.title",
+      "item": "apprenticecodex:craftsmans_delight",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.craftsmans_delight.page.00_spotlight.text"
+    }
+  ]
+}

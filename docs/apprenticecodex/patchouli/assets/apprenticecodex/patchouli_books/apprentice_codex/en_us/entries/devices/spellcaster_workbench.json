@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.spellcaster_workbench.name",
+  "category": "apprenticecodex:devices",
+  "icon": "apprenticecodex:spellcaster_workbench",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.spellcaster_workbench.page.00_spotlight.title",
+      "item": "apprenticecodex:spellcaster_workbench",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.spellcaster_workbench.page.00_spotlight.text"
+    }
+  ]
+}

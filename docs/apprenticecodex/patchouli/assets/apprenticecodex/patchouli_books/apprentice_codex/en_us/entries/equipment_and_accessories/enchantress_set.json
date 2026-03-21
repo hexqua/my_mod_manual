@@ -1,0 +1,19 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.enchantress_set.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:enchantress_robe",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.enchantress_set.page.00_spotlight.title",
+      "item": "apprenticecodex:enchantress_robe",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.enchantress_set.page.00_spotlight.text"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.enchantress_set.page.01_coverage.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.enchantress_set.page.01_coverage.text"
+    }
+  ]
+}

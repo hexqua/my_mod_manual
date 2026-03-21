@@ -1,0 +1,8 @@
+id: grimoire_manifest
+name: "グリモア目録"
+category: magic_tools
+icon: apprenticecodex:grimoire_manifest
+sortnum: 7
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

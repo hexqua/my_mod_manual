@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.apprentice_desk.name",
+  "category": "apprenticecodex:devices",
+  "icon": "apprenticecodex:apprentice_desk",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.apprentice_desk.page.00_spotlight.title",
+      "item": "apprenticecodex:apprentice_desk",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.apprentice_desk.page.00_spotlight.text"
+    }
+  ]
+}

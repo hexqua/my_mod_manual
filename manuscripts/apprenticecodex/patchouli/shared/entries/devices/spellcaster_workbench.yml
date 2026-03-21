@@ -1,0 +1,8 @@
+id: spellcaster_workbench
+name: "魔術師の作業台"
+category: devices
+icon: apprenticecodex:spellcaster_workbench
+sortnum: 1
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

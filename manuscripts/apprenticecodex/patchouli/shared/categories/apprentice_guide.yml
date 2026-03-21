@@ -1,0 +1,6 @@
+id: apprentice_guide
+name: "見習い向け"
+description: |
+  実装説明ではなく、見習い向けのおすすめ進行メモを後で書き込むための仮置きカテゴリです。
+icon: minecraft:book
+sortnum: 0

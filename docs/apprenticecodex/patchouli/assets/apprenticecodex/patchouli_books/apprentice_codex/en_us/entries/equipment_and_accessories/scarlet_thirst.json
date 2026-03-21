@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.scarlet_thirst.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:scarlet_thirst",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.scarlet_thirst.page.00_spotlight.title",
+      "item": "apprenticecodex:scarlet_thirst",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.scarlet_thirst.page.00_spotlight.text"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+id: reservoir
+name: "貯蔵"
+category: enchantments
+icon: minecraft:enchanted_book
+sortnum: 1
+pages:
+  - type: text
+    source: 00-overview.md

@@ -1,0 +1,10 @@
+id: enchantress_set
+name: "付呪魔女装備"
+category: equipment_and_accessories
+icon: apprenticecodex:enchantress_robe
+sortnum: 1
+pages:
+  - type: spotlight
+    source: 00-spotlight.md
+  - type: text
+    source: 01-coverage.md

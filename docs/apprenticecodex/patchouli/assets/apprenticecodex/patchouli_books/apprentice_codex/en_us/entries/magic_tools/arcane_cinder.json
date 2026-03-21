@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.arcane_cinder.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:arcane_cinder",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.arcane_cinder.page.00_spotlight.title",
+      "item": "apprenticecodex:arcane_cinder",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.arcane_cinder.page.00_spotlight.text"
+    }
+  ]
+}

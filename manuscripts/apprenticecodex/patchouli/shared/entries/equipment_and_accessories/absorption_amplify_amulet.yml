@@ -1,0 +1,8 @@
+id: absorption_amplify_amulet
+name: "衝撃吸収増強のネックレス"
+category: equipment_and_accessories
+icon: apprenticecodex:absorption_amplify_amulet
+sortnum: 6
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

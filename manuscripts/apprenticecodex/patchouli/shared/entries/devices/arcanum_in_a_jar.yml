@@ -1,0 +1,8 @@
+id: arcanum_in_a_jar
+name: "瓶詰めの神秘"
+category: devices
+icon: apprenticecodex:arcanum_in_a_jar
+sortnum: 2
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

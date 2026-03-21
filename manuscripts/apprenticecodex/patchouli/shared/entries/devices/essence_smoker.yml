@@ -1,0 +1,8 @@
+id: essence_smoker
+name: "エッセンス燻製台"
+category: devices
+icon: apprenticecodex:essence_smoker
+sortnum: 3
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

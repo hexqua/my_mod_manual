@@ -40,8 +40,23 @@ def test_build_patchouli_skips_non_en_us_json_when_only_text_differs(tmp_path: P
     output_root = root / "docs" / "apprenticecodex" / "patchouli"
     expected = {
         output_root / "data" / "apprenticecodex" / "patchouli_books" / "apprentice_codex" / "book.json",
-        output_root / "assets" / "apprenticecodex" / "patchouli_books" / "apprentice_codex" / "en_us" / "categories" / "items.json",
-        output_root / "assets" / "apprenticecodex" / "patchouli_books" / "apprentice_codex" / "en_us" / "entries" / "items" / "explorers_codex.json",
+        output_root
+        / "assets"
+        / "apprenticecodex"
+        / "patchouli_books"
+        / "apprentice_codex"
+        / "en_us"
+        / "categories"
+        / "equipment_and_accessories.json",
+        output_root
+        / "assets"
+        / "apprenticecodex"
+        / "patchouli_books"
+        / "apprentice_codex"
+        / "en_us"
+        / "entries"
+        / "equipment_and_accessories"
+        / "explorers_codex.json",
         output_root / "assets" / "apprenticecodex" / "lang" / "en_us.json",
         output_root / "assets" / "apprenticecodex" / "lang" / "ja_jp.json",
     }
@@ -87,7 +102,7 @@ def test_build_patchouli_generates_lang_entries_from_source_locale_and_override(
         / "apprentice_codex"
         / "en_us"
         / "entries"
-        / "items"
+        / "equipment_and_accessories"
         / "explorers_codex.json"
     )
 
@@ -96,9 +111,9 @@ def test_build_patchouli_generates_lang_entries_from_source_locale_and_override(
     en_entry = json.loads(en_entry_path.read_text(encoding="utf-8"))
 
     assert en_lang["patchouli.apprenticecodex.apprentice_codex.name"] == "Apprentice's Codex"
-    assert ja_lang["patchouli.apprenticecodex.apprentice_codex.subtitle"] == "カテゴリ構成サンプル"
-    assert en_lang["patchouli.apprenticecodex.apprentice_codex.category.items.name"] == "Items"
-    assert ja_lang["patchouli.apprenticecodex.apprentice_codex.category.items.name"] == "アイテム"
+    assert ja_lang["patchouli.apprenticecodex.apprentice_codex.subtitle"] == "初期項目スタブ"
+    assert en_lang["patchouli.apprenticecodex.apprentice_codex.category.equipment_and_accessories.name"] == "Equipment & Accessories"
+    assert ja_lang["patchouli.apprenticecodex.apprentice_codex.category.equipment_and_accessories.name"] == "防具・装飾具"
     assert en_lang["patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.name"] == "Explorer's Codex"
     assert ja_lang["patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.name"] == "探索者の写本"
     assert en_entry["pages"][0]["text"] == "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.text"
@@ -126,7 +141,7 @@ def test_locale_override_can_replace_page_list_and_emit_locale_json(tmp_path: Pa
         / "locales"
         / "ja_jp"
         / "entries"
-        / "items"
+        / "equipment_and_accessories"
         / "explorers_codex.yml"
     )
     override_entry.parent.mkdir(parents=True, exist_ok=True)
@@ -139,9 +154,7 @@ def test_locale_override_can_replace_page_list_and_emit_locale_json(tmp_path: Pa
                 "  - type: spotlight",
                 "    source: 00-spotlight.md",
                 "  - type: text",
-                "    source: 01-sample-role.md",
-                "  - type: text",
-                "    source: 02-extra-note.md",
+                "    source: 01-extra-note.md",
                 "",
             ]
         ),
@@ -156,7 +169,7 @@ def test_locale_override_can_replace_page_list_and_emit_locale_json(tmp_path: Pa
         / "ja_jp"
         / "pages"
         / "explorers_codex"
-        / "02-extra-note.md"
+        / "01-extra-note.md"
     )
     extra_page.parent.mkdir(parents=True, exist_ok=True)
     extra_page.write_text(
@@ -186,7 +199,7 @@ def test_locale_override_can_replace_page_list_and_emit_locale_json(tmp_path: Pa
         / "apprentice_codex"
         / "en_us"
         / "entries"
-        / "items"
+        / "equipment_and_accessories"
         / "explorers_codex.json"
     )
     ja_entry_path = (
@@ -200,13 +213,13 @@ def test_locale_override_can_replace_page_list_and_emit_locale_json(tmp_path: Pa
         / "apprentice_codex"
         / "ja_jp"
         / "entries"
-        / "items"
+        / "equipment_and_accessories"
         / "explorers_codex.json"
     )
 
     en_entry = json.loads(en_entry_path.read_text(encoding="utf-8"))
     ja_entry = json.loads(ja_entry_path.read_text(encoding="utf-8"))
 
-    assert len(en_entry["pages"]) == 2
-    assert len(ja_entry["pages"]) == 3
-    assert ja_entry["pages"][2]["text"] == "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.02_extra_note.text"
+    assert len(en_entry["pages"]) == 1
+    assert len(ja_entry["pages"]) == 2
+    assert ja_entry["pages"][1]["text"] == "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.01_extra_note.text"

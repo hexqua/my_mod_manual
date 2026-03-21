@@ -1,0 +1,8 @@
+id: scarlet_thirst
+name: "真紅の渇望"
+category: equipment_and_accessories
+icon: apprenticecodex:scarlet_thirst
+sortnum: 3
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

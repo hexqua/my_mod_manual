@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.photon_siphon.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:photon_siphon",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.photon_siphon.page.00_spotlight.title",
+      "item": "apprenticecodex:photon_siphon",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.photon_siphon.page.00_spotlight.text"
+    }
+  ]
+}

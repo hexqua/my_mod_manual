@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.grimoire_manifest.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:grimoire_manifest",
+  "sortnum": 7,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.grimoire_manifest.page.00_spotlight.title",
+      "item": "apprenticecodex:grimoire_manifest",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.grimoire_manifest.page.00_spotlight.text"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.atelier_station.name",
+  "category": "apprenticecodex:devices",
+  "icon": "apprenticecodex:atelier_station",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.atelier_station.page.00_spotlight.title",
+      "item": "apprenticecodex:atelier_station",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.atelier_station.page.00_spotlight.text"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.tense.name",
+  "category": "apprenticecodex:enchantments",
+  "icon": "minecraft:enchanted_book",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.tense.page.00_overview.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.tense.page.00_overview.text"
+    }
+  ]
+}

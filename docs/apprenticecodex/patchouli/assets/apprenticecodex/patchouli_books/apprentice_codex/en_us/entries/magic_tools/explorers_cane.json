@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_cane.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:explorers_cane",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_cane.page.00_spotlight.title",
+      "item": "apprenticecodex:explorers_cane",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_cane.page.00_spotlight.text"
+    }
+  ]
+}

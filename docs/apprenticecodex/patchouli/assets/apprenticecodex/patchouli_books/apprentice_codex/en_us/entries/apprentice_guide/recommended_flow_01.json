@@ -1,0 +1,13 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.name",
+  "category": "apprenticecodex:apprentice_guide",
+  "icon": "minecraft:book",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.00_overview.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.00_overview.text"
+    }
+  ]
+}
