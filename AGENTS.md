@@ -33,6 +33,7 @@ manuscripts/<modid>/patchouli/
     entries/**/*.yml
     pages/<entry_id>/*.md
   locales/<locale>/
+    book.yml                # 任意 override
     categories/*.yml        # 任意 override
     entries/**/*.yml        # 任意 override
     pages/<entry_id>/*.md   # 任意 override
@@ -40,6 +41,7 @@ manuscripts/<modid>/patchouli/
 
 - `shared/` が説明書構造の正本で、`locales/<locale>/` は差分だけを持つ。
 - `shared/` は `book.yml` の `source_locale` で書かれた正本として扱う。
+- `locales/<locale>/book.yml` では書籍タイトルや導入文の翻訳差分を持てる。
 - `pages/*.md` は YAML front matter と本文を持つ。
 - `book.yml` は共有メタデータを持ち、`source_locale` と `locales` で原稿言語と生成対象 locale を列挙する。
 - 本文は当面 CommonMark 変換せず、Patchouli の `text` としてそのまま扱う。

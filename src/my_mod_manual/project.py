@@ -97,7 +97,7 @@ def build_patchouli(root: Path, modid: str | None = None) -> list[Path]:
         book, book_namespace, book_id, source_locale, locales = load_book_settings(root, mod.modid)
         shared_categories = load_shared_categories(root, mod.modid)
         shared_entries = load_shared_entries(root, mod.modid)
-        book_payload, default_book_lang = normalize_book_payload(book, book_path, book_namespace, book_id, locales)
+        book_payload, source_book_values = normalize_book_payload(book, book_path, book_namespace, book_id)
 
         cleanup_patchouli_outputs(root, mod.modid, book_namespace, book_id)
 
@@ -109,7 +109,14 @@ def build_patchouli(root: Path, modid: str | None = None) -> list[Path]:
         locale_outputs: dict[str, tuple[dict[str, dict[str, Any]], dict[Path, dict[str, Any]], dict[str, str]]] = {}
         ordered_locales = ordered_patchouli_locales(locales)
         for locale in ordered_locales:
-            seed_book_lang = default_book_lang if locale == DEFAULT_LOCALE else {}
+            book_override = load_locale_book_override(root, mod.modid, locale)
+            seed_book_lang = resolve_book_lang_entries(
+                book_payload,
+                source_book_values,
+                book_override,
+                locale,
+                source_locale,
+            )
             locale_outputs[locale] = build_patchouli_locale_outputs(
                 root,
                 mod.modid,
@@ -426,7 +433,7 @@ def validate_patchouli(root: Path, mod: ModSpec) -> list[str]:
         book, book_namespace, book_id, source_locale, locales = load_book_settings(root, mod.modid)
         shared_categories = load_shared_categories(root, mod.modid)
         shared_entries = load_shared_entries(root, mod.modid)
-        normalize_book_payload(book, book_path, book_namespace, book_id, locales)
+        normalize_book_payload(book, book_path, book_namespace, book_id)
     except ManualError as exc:
         errors.append(str(exc))
         return errors
@@ -440,6 +447,7 @@ def validate_patchouli(root: Path, mod: ModSpec) -> list[str]:
 
     for locale in locales:
         try:
+            load_locale_book_override(root, mod.modid, locale)
             category_overrides = load_locale_category_overrides(root, mod.modid, locale, shared_categories)
             entry_overrides = load_locale_entry_overrides(root, mod.modid, locale, shared_entries)
         except ManualError as exc:
@@ -552,6 +560,26 @@ def load_locale_category_overrides(
     return overrides
 
 
+def load_locale_book_override(root: Path, modid: str, locale: str) -> dict[str, str]:
+    path = locale_root(root, modid, locale) / "book.yml"
+    if not path.exists():
+        return {}
+
+    payload = load_yaml_dict(path)
+    unknown_keys = sorted(set(payload) - set(BOOK_TRANSLATABLE_FIELDS))
+    if unknown_keys:
+        raise ManualError(f"{path}: unsupported keys: {', '.join(unknown_keys)}")
+
+    override: dict[str, str] = {}
+    for key, value in payload.items():
+        if not isinstance(value, str) or not value:
+            raise ManualError(f"{path}: {key} must be a non-empty string")
+        if looks_like_translation_key(value):
+            raise ManualError(f"{path}: {key} must be raw localized text, not a translation key")
+        override[key] = value
+    return override
+
+
 def load_locale_entry_overrides(
     root: Path, modid: str, locale: str, shared_entries: dict[Path, tuple[Path, dict[str, Any]]]
 ) -> dict[Path, tuple[Path, dict[str, Any]]]:
@@ -573,10 +601,10 @@ def load_locale_entry_overrides(
 
 
 def normalize_book_payload(
-    book: dict[str, Any], book_path: Path, namespace: str, book_id: str, locales: tuple[str, ...]
+    book: dict[str, Any], book_path: Path, namespace: str, book_id: str
 ) -> tuple[dict[str, Any], dict[str, str]]:
     payload = dict(book)
-    default_lang: dict[str, str] = {}
+    source_values: dict[str, str] = {}
 
     for field in BOOK_TRANSLATABLE_FIELDS:
         value = payload.get(field)
@@ -584,15 +612,13 @@ def normalize_book_payload(
             continue
         if looks_like_translation_key(value):
             continue
-        if len(locales) > 1:
-            raise ManualError(f"{book_path}: {field} must use a translation key when locales has multiple items")
 
-        key = build_translation_key(namespace, book_id, "book", field)
-        default_lang[key] = value
+        key = build_book_translation_key(namespace, book_id, field)
+        source_values[field] = value
         payload[field] = key
 
     payload["i18n"] = True
-    return payload, default_lang
+    return payload, source_values
 
 
 def merge_patchouli_document(
@@ -694,8 +720,34 @@ def localize_mapping_field(payload: dict[str, Any], field: str, key: str, lang_e
     lang_entries[key] = value
 
 
+def resolve_book_lang_entries(
+    book_payload: dict[str, Any],
+    source_book_values: dict[str, str],
+    locale_override: dict[str, str],
+    locale: str,
+    source_locale: str,
+) -> dict[str, str]:
+    lang_entries: dict[str, str] = {}
+    for field in BOOK_TRANSLATABLE_FIELDS:
+        key = book_payload.get(field)
+        if not isinstance(key, str) or not looks_like_translation_key(key):
+            continue
+
+        raw_value = locale_override.get(field)
+        if raw_value is None and locale == source_locale:
+            raw_value = source_book_values.get(field)
+        if raw_value is None:
+            continue
+        lang_entries[key] = raw_value
+    return lang_entries
+
+
 def build_translation_key(namespace: str, book_id: str, *parts: str) -> str:
     return ".".join(("patchouli", namespace, book_id, *parts))
+
+
+def build_book_translation_key(namespace: str, book_id: str, field: str) -> str:
+    return ".".join(("patchouli", namespace, book_id, field))
 
 
 def page_translation_identifier(source_name: str | None, page_index: int) -> str:

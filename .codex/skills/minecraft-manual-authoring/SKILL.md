@@ -22,6 +22,7 @@ Prefer it when the task is about drafting manuscript YAML or Markdown, choosing 
 
 - Keep IDs in `snake_case`.
 - Treat `manuscripts/` as the source of truth and `docs/` as generated output.
+- Keep book-level locale text in `book.yml` for the `source_locale`, and use `locales/<locale>/book.yml` for translated book title, subtitle, or landing text overrides when needed.
 - For Patchouli entries, treat `shared/` as the `source_locale` manuscript and place locale-specific overrides under `locales/<locale>/`.
 - Keep scaffolds readable and minimal. Do not invent extra abstraction layers.
 - Preserve the current repository bias: Patchouli first, Modonomicon later.

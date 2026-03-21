@@ -95,6 +95,8 @@ def test_build_patchouli_generates_lang_entries_from_source_locale_and_override(
     ja_lang = json.loads(ja_lang_path.read_text(encoding="utf-8"))
     en_entry = json.loads(en_entry_path.read_text(encoding="utf-8"))
 
+    assert en_lang["patchouli.apprenticecodex.apprentice_codex.name"] == "Apprentice's Codex"
+    assert ja_lang["patchouli.apprenticecodex.apprentice_codex.subtitle"] == "カテゴリ構成サンプル"
     assert en_lang["patchouli.apprenticecodex.apprentice_codex.category.items.name"] == "Items"
     assert ja_lang["patchouli.apprenticecodex.apprentice_codex.category.items.name"] == "アイテム"
     assert en_lang["patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.name"] == "Explorer's Codex"

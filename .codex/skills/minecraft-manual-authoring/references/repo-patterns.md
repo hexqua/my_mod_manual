@@ -11,6 +11,7 @@ manuscripts/<modid>/patchouli/
     entries/**/*.yml
     pages/<entry_id>/*.md
   locales/<locale>/
+    book.yml
     categories/*.yml
     entries/**/*.yml
     pages/<entry_id>/*.md
@@ -28,7 +29,7 @@ docs/<modid>/modonomicon/
 
 ## Minimal File Patterns
 
-`shared/` is the manuscript written in `book.yml` `source_locale`. `locales/<locale>/` is only for overrides.
+`shared/` is the manuscript written in `book.yml` `source_locale`. `locales/<locale>/book.yml` is for translated book title, subtitle, and landing text. Other `locales/<locale>/` files are only for overrides.
 
 ### `book.yml`
 

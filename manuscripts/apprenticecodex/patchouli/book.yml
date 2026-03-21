@@ -1,9 +1,9 @@
 book_id: apprentice_codex
 book_namespace: apprenticecodex
 source_locale: ja_jp
-name: patchouli.apprenticecodex.apprentice_codex.name
-landing_text: patchouli.apprenticecodex.apprentice_codex.landing_text
-subtitle: patchouli.apprenticecodex.apprentice_codex.subtitle
+name: "Apprentice's Codex"
+landing_text: "Apprentice's Codex 向けの Patchouli サンプル本です。$(br2)一般的な構成に合わせて、トップレベルにカテゴリを置き、その配下へ個別 entry をぶら下げています。"
+subtitle: "カテゴリ構成サンプル"
 version: "0"
 use_resource_pack: true
 model: patchouli:book_brown

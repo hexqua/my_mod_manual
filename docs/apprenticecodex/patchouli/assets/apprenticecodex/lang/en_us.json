@@ -1,4 +1,7 @@
 {
+  "patchouli.apprenticecodex.apprentice_codex.name": "Apprentice's Codex",
+  "patchouli.apprenticecodex.apprentice_codex.landing_text": "This Patchouli book is a minimal sample for Apprentice's Codex.$(br2)It uses a conventional structure with top-level categories and individual entries nested beneath them.",
+  "patchouli.apprenticecodex.apprentice_codex.subtitle": "Category Sample",
   "patchouli.apprenticecodex.apprentice_codex.category.items.name": "Items",
   "patchouli.apprenticecodex.apprentice_codex.category.items.description": "This category groups item notes. For now it only contains Explorer's Codex as a simple Patchouli tree sample.\n",
   "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.name": "Explorer's Codex",

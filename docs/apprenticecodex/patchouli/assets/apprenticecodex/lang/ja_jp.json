@@ -1,4 +1,7 @@
 {
+  "patchouli.apprenticecodex.apprentice_codex.name": "Apprentice's Codex",
+  "patchouli.apprenticecodex.apprentice_codex.landing_text": "Apprentice's Codex 向けの Patchouli サンプル本です。$(br2)一般的な構成に合わせて、トップレベルにカテゴリを置き、その配下へ個別 entry をぶら下げています。",
+  "patchouli.apprenticecodex.apprentice_codex.subtitle": "カテゴリ構成サンプル",
   "patchouli.apprenticecodex.apprentice_codex.category.items.name": "アイテム",
   "patchouli.apprenticecodex.apprentice_codex.category.items.description": "追加アイテムの説明をまとめるカテゴリです。今回は Patchouli のツリーサンプルとして、探索者の写本だけを配置しています。\n",
   "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.name": "探索者の写本",
