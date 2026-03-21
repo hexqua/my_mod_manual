@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 import tomllib
 from pathlib import Path
 from typing import Any
@@ -93,111 +94,168 @@ def build_patchouli(root: Path, modid: str | None = None) -> list[Path]:
             continue
 
         book_path = patchouli_dir(root, mod.modid) / "book.yml"
-        book, book_namespace, book_id, locales = load_book_settings(root, mod.modid)
+        book, book_namespace, book_id, source_locale, locales = load_book_settings(root, mod.modid)
         shared_categories = load_shared_categories(root, mod.modid)
-        shared_entries, _ = load_shared_entries(root, mod.modid)
+        shared_entries = load_shared_entries(root, mod.modid)
         book_payload, default_book_lang = normalize_book_payload(book, book_path, book_namespace, book_id, locales)
+
+        cleanup_patchouli_outputs(root, mod.modid, book_namespace, book_id)
 
         book_output_path = patchouli_book_output_path(root, mod.modid, book_namespace, book_id)
         book_output_path.parent.mkdir(parents=True, exist_ok=True)
         write_json(book_output_path, book_payload)
         written_files.append(book_output_path)
 
-        for locale in locales:
-            categories_root = patchouli_categories_output_dir(root, mod.modid, book_namespace, book_id, locale)
-            entries_root = patchouli_entries_output_dir(root, mod.modid, book_namespace, book_id, locale)
+        locale_outputs: dict[str, tuple[dict[str, dict[str, Any]], dict[Path, dict[str, Any]], dict[str, str]]] = {}
+        ordered_locales = ordered_patchouli_locales(locales)
+        for locale in ordered_locales:
+            seed_book_lang = default_book_lang if locale == DEFAULT_LOCALE else {}
+            locale_outputs[locale] = build_patchouli_locale_outputs(
+                root,
+                mod.modid,
+                locale,
+                source_locale,
+                book_namespace,
+                book_id,
+                shared_categories,
+                shared_entries,
+                seed_book_lang,
+            )
+
+        default_category_payloads, default_entry_payloads, _ = locale_outputs[DEFAULT_LOCALE]
+        for locale in ordered_locales:
+            category_payloads, entry_payloads, lang_entries = locale_outputs[locale]
+
+            if locale != DEFAULT_LOCALE:
+                category_payloads = {
+                    category_id: payload
+                    for category_id, payload in category_payloads.items()
+                    if payload != default_category_payloads[category_id]
+                }
+                entry_payloads = {
+                    relative_path: payload
+                    for relative_path, payload in entry_payloads.items()
+                    if payload != default_entry_payloads[relative_path]
+                }
+
             lang_output_path = patchouli_lang_output_path(root, mod.modid, book_namespace, locale)
-            categories_root.mkdir(parents=True, exist_ok=True)
-            entries_root.mkdir(parents=True, exist_ok=True)
             lang_output_path.parent.mkdir(parents=True, exist_ok=True)
-
-            category_overrides = load_locale_category_overrides(root, mod.modid, locale, shared_categories)
-            entry_overrides = load_locale_entry_overrides(root, mod.modid, locale, shared_entries)
-            lang_entries = dict(default_book_lang) if locale == DEFAULT_LOCALE else {}
-
-            for category_id in sorted(shared_categories):
-                shared_path, shared_category = shared_categories[category_id]
-                category = merge_patchouli_document(shared_category, category_overrides.get(category_id))
-                category_payload = dict(category)
-                category_payload.pop("id", None)
-                localize_mapping_field(
-                    category_payload,
-                    "name",
-                    build_translation_key(book_namespace, book_id, "category", category_id, "name"),
-                    lang_entries,
-                )
-                localize_mapping_field(
-                    category_payload,
-                    "description",
-                    build_translation_key(book_namespace, book_id, "category", category_id, "description"),
-                    lang_entries,
-                )
-
-                output_path = categories_root / f"{category_id}.json"
-                write_json(output_path, category_payload)
-                written_files.append(output_path)
-
-            category_ids = set(shared_categories)
-            for relative_path in sorted(shared_entries, key=lambda item: item.as_posix()):
-                shared_path, shared_entry = shared_entries[relative_path]
-                entry = merge_patchouli_document(shared_entry, entry_overrides.get(relative_path))
-                entry_id = require_slug(entry.get("id"), f"{shared_path}: id")
-                category_id = require_slug(entry.get("category"), f"{shared_path}: category")
-                if category_id not in category_ids:
-                    raise ManualError(f"{shared_path}: unknown category '{category_id}'")
-
-                pages = entry.get("pages")
-                if not isinstance(pages, list) or not pages:
-                    raise ManualError(f"{shared_path}: pages must be a non-empty list")
-
-                entry_payload = dict(entry)
-                entry_payload.pop("id", None)
-                entry_payload["category"] = f"{book_namespace}:{category_id}"
-                localize_mapping_field(
-                    entry_payload,
-                    "name",
-                    build_translation_key(book_namespace, book_id, "entry", entry_id, "name"),
-                    lang_entries,
-                )
-
-                resolved_pages = []
-                for page_index, raw_page in enumerate(pages, start=1):
-                    page, source_name = resolve_page(shared_path, raw_page, root, mod.modid, locale, entry_id)
-                    page_identifier = page_translation_identifier(source_name, page_index)
-                    localize_mapping_field(
-                        page,
-                        "title",
-                        build_translation_key(book_namespace, book_id, "entry", entry_id, "page", page_identifier, "title"),
-                        lang_entries,
-                    )
-                    localize_mapping_field(
-                        page,
-                        "text",
-                        build_translation_key(book_namespace, book_id, "entry", entry_id, "page", page_identifier, "text"),
-                        lang_entries,
-                    )
-                    resolved_pages.append(page)
-
-                entry_payload["pages"] = resolved_pages
-
-                output_path = entries_root / relative_path.with_suffix(".json")
-                output_path.parent.mkdir(parents=True, exist_ok=True)
-                write_json(output_path, entry_payload)
-                written_files.append(output_path)
-
             write_json(lang_output_path, lang_entries)
             written_files.append(lang_output_path)
+
+            if category_payloads:
+                categories_root = patchouli_categories_output_dir(root, mod.modid, book_namespace, book_id, locale)
+                categories_root.mkdir(parents=True, exist_ok=True)
+                for category_id, payload in category_payloads.items():
+                    output_path = categories_root / f"{category_id}.json"
+                    write_json(output_path, payload)
+                    written_files.append(output_path)
+
+            if entry_payloads:
+                entries_root = patchouli_entries_output_dir(root, mod.modid, book_namespace, book_id, locale)
+                entries_root.mkdir(parents=True, exist_ok=True)
+                for relative_path, payload in entry_payloads.items():
+                    output_path = entries_root / relative_path.with_suffix(".json")
+                    output_path.parent.mkdir(parents=True, exist_ok=True)
+                    write_json(output_path, payload)
+                    written_files.append(output_path)
 
     return written_files
 
 
-def load_book_settings(root: Path, modid: str) -> tuple[dict[str, Any], str, str, tuple[str, ...]]:
+def build_patchouli_locale_outputs(
+    root: Path,
+    modid: str,
+    locale: str,
+    source_locale: str,
+    namespace: str,
+    book_id: str,
+    shared_categories: dict[str, tuple[Path, dict[str, Any]]],
+    shared_entries: dict[Path, tuple[Path, dict[str, Any]]],
+    seed_book_lang: dict[str, str],
+) -> tuple[dict[str, dict[str, Any]], dict[Path, dict[str, Any]], dict[str, str]]:
+    category_overrides = load_locale_category_overrides(root, modid, locale, shared_categories)
+    entry_overrides = load_locale_entry_overrides(root, modid, locale, shared_entries)
+    lang_entries = dict(seed_book_lang)
+    category_payloads: dict[str, dict[str, Any]] = {}
+    entry_payloads: dict[Path, dict[str, Any]] = {}
+
+    for category_id in sorted(shared_categories):
+        _, shared_category = shared_categories[category_id]
+        category = merge_patchouli_document(shared_category, category_overrides.get(category_id))
+        payload = dict(category)
+        payload.pop("id", None)
+        localize_mapping_field(
+            payload,
+            "name",
+            build_translation_key(namespace, book_id, "category", category_id, "name"),
+            lang_entries,
+        )
+        localize_mapping_field(
+            payload,
+            "description",
+            build_translation_key(namespace, book_id, "category", category_id, "description"),
+            lang_entries,
+        )
+        category_payloads[category_id] = payload
+
+    category_ids = set(shared_categories)
+    for relative_path in sorted(shared_entries, key=lambda item: item.as_posix()):
+        entry_path, shared_entry = shared_entries[relative_path]
+        entry = merge_patchouli_document(shared_entry, entry_overrides.get(relative_path))
+        entry_id = require_slug(entry.get("id"), f"{entry_path}: id")
+        category_id = require_slug(entry.get("category"), f"{entry_path}: category")
+        if category_id not in category_ids:
+            raise ManualError(f"{entry_path}: unknown category '{category_id}'")
+
+        pages = entry.get("pages")
+        if not isinstance(pages, list) or not pages:
+            raise ManualError(f"{entry_path}: pages must be a non-empty list")
+
+        payload = dict(entry)
+        payload.pop("id", None)
+        payload["category"] = f"{namespace}:{category_id}"
+        localize_mapping_field(
+            payload,
+            "name",
+            build_translation_key(namespace, book_id, "entry", entry_id, "name"),
+            lang_entries,
+        )
+
+        resolved_pages = []
+        for page_index, raw_page in enumerate(pages, start=1):
+            page, source_name = resolve_page(entry_path, raw_page, root, modid, locale, source_locale, entry_id)
+            page_identifier = page_translation_identifier(source_name, page_index)
+            localize_mapping_field(
+                page,
+                "title",
+                build_translation_key(namespace, book_id, "entry", entry_id, "page", page_identifier, "title"),
+                lang_entries,
+            )
+            localize_mapping_field(
+                page,
+                "text",
+                build_translation_key(namespace, book_id, "entry", entry_id, "page", page_identifier, "text"),
+                lang_entries,
+            )
+            resolved_pages.append(page)
+
+        payload["pages"] = resolved_pages
+        entry_payloads[relative_path] = payload
+
+    return category_payloads, entry_payloads, lang_entries
+
+
+def load_book_settings(root: Path, modid: str) -> tuple[dict[str, Any], str, str, str, tuple[str, ...]]:
     book_path = patchouli_dir(root, modid) / "book.yml"
     book = load_yaml_dict(book_path)
     book_namespace = require_slug(book.pop("book_namespace", modid), f"{book_path}: book_namespace")
     book_id = require_slug(book.pop("book_id", modid), f"{book_path}: book_id")
     locales = parse_book_locales(book, book_path)
-    return book, book_namespace, book_id, locales
+    source_locale = parse_book_source_locale(book, book_path, locales)
+    if DEFAULT_LOCALE not in locales:
+        raise ManualError(f"{book_path}: locales must include {DEFAULT_LOCALE}")
+    return book, book_namespace, book_id, source_locale, locales
 
 
 def parse_book_locales(book: dict[str, Any], book_path: Path) -> tuple[str, ...]:
@@ -216,6 +274,13 @@ def parse_book_locales(book: dict[str, Any], book_path: Path) -> tuple[str, ...]
     if len(set(locales)) != len(locales):
         raise ManualError(f"{book_path}: locales contains duplicates")
     return locales
+
+
+def parse_book_source_locale(book: dict[str, Any], book_path: Path, locales: tuple[str, ...]) -> str:
+    source_locale = require_slug(book.pop("source_locale", DEFAULT_LOCALE), f"{book_path}: source_locale")
+    if source_locale not in locales:
+        raise ManualError(f"{book_path}: source_locale '{source_locale}' must be included in locales")
+    return source_locale
 
 
 def scaffold_mod(root: Path, modid: str, display_name: str) -> list[Path]:
@@ -245,6 +310,7 @@ def scaffold_mod(root: Path, modid: str, display_name: str) -> list[Path]:
                 [
                     f"book_id: {modid}",
                     f"book_namespace: {modid}",
+                    f"source_locale: {DEFAULT_LOCALE}",
                     f'name: "{display_name} Manual"',
                     "landing_text: |",
                     f"  Welcome to the {display_name} manual.",
@@ -357,9 +423,9 @@ def validate_patchouli(root: Path, mod: ModSpec) -> list[str]:
         return errors
 
     try:
-        book, book_namespace, book_id, locales = load_book_settings(root, mod.modid)
+        book, book_namespace, book_id, source_locale, locales = load_book_settings(root, mod.modid)
         shared_categories = load_shared_categories(root, mod.modid)
-        shared_entries, entry_ids = load_shared_entries(root, mod.modid)
+        shared_entries = load_shared_entries(root, mod.modid)
         normalize_book_payload(book, book_path, book_namespace, book_id, locales)
     except ManualError as exc:
         errors.append(str(exc))
@@ -368,7 +434,7 @@ def validate_patchouli(root: Path, mod: ModSpec) -> list[str]:
     for relative_path, (entry_path, entry) in shared_entries.items():
         try:
             validate_entry_document(entry_path, entry, set(shared_categories))
-            validate_entry_pages(root, mod.modid, DEFAULT_LOCALE, entry_path, entry)
+            validate_entry_pages(root, mod.modid, source_locale, entry_path, entry)
         except ManualError as exc:
             errors.append(str(exc))
 
@@ -391,7 +457,7 @@ def validate_patchouli(root: Path, mod: ModSpec) -> list[str]:
                     errors.append(f"{shared_path}: duplicated entry id '{entry_id}'")
                 entries_seen.add(entry_id)
                 validate_entry_document(shared_path, entry, set(shared_categories))
-                validate_entry_pages(root, mod.modid, locale, shared_path, entry)
+                validate_entry_pages(root, mod.modid, locale, shared_path, entry, source_locale)
             except ManualError as exc:
                 errors.append(str(exc))
 
@@ -419,10 +485,12 @@ def validate_entry_document(entry_path: Path, entry: dict[str, Any], category_id
             raise ManualError(f"{entry_path}: pages[{page_index}] is missing type")
 
 
-def validate_entry_pages(root: Path, modid: str, locale: str, entry_path: Path, entry: dict[str, Any]) -> None:
+def validate_entry_pages(
+    root: Path, modid: str, locale: str, entry_path: Path, entry: dict[str, Any], source_locale: str | None = None
+) -> None:
     entry_id = require_slug(entry.get("id"), f"{entry_path}: id")
     seen_sources: set[str] = set()
-    for page_index, raw_page in enumerate(entry.get("pages", []), start=1):
+    for raw_page in entry.get("pages", []):
         source_name = raw_page.get("source")
         if not source_name:
             continue
@@ -432,7 +500,7 @@ def validate_entry_pages(root: Path, modid: str, locale: str, entry_path: Path, 
             raise ManualError(f"{entry_path}: duplicated page source '{source_text}'")
         seen_sources.add(source_text)
 
-        source_path = resolve_page_source_path(root, modid, locale, entry_id, source_text)
+        source_path = resolve_page_source_path(root, modid, locale, source_locale or locale, entry_id, source_text)
         try:
             load_markdown_document(source_path)
         except ManualError as exc:
@@ -450,7 +518,7 @@ def load_shared_categories(root: Path, modid: str) -> dict[str, tuple[Path, dict
     return categories
 
 
-def load_shared_entries(root: Path, modid: str) -> tuple[dict[Path, tuple[Path, dict[str, Any]]], dict[str, Path]]:
+def load_shared_entries(root: Path, modid: str) -> dict[Path, tuple[Path, dict[str, Any]]]:
     entries: dict[Path, tuple[Path, dict[str, Any]]] = {}
     entry_ids: dict[str, Path] = {}
     entries_dir = shared_entries_dir(root, modid)
@@ -462,7 +530,7 @@ def load_shared_entries(root: Path, modid: str) -> tuple[dict[Path, tuple[Path, 
         relative_path = entry_path.relative_to(entries_dir)
         entries[relative_path] = (entry_path, entry)
         entry_ids[entry_id] = entry_path
-    return entries, entry_ids
+    return entries
 
 
 def load_locale_category_overrides(
@@ -542,7 +610,13 @@ def merge_patchouli_document(
 
 
 def resolve_page(
-    entry_path: Path, raw_page: dict[str, Any], root: Path, modid: str, locale: str, entry_id: str
+    entry_path: Path,
+    raw_page: dict[str, Any],
+    root: Path,
+    modid: str,
+    locale: str,
+    source_locale: str,
+    entry_id: str,
 ) -> tuple[dict[str, Any], str | None]:
     if not isinstance(raw_page, dict):
         raise ManualError(f"{entry_path}: page must be a mapping")
@@ -552,8 +626,7 @@ def resolve_page(
     source_text = str(source_name) if source_name else None
 
     if source_text:
-        source_path = resolve_page_source_path(root, modid, locale, entry_id, source_text)
-        frontmatter, body = load_markdown_document(source_path)
+        frontmatter, body = load_resolved_markdown_document(root, modid, locale, source_locale, entry_id, source_text)
         for key, value in frontmatter.items():
             page.setdefault(key, value)
         if body and "text" not in page:
@@ -567,7 +640,9 @@ def resolve_page(
     return page, source_text
 
 
-def resolve_page_source_path(root: Path, modid: str, locale: str, entry_id: str, source_name: str) -> Path:
+def resolve_page_source_path(
+    root: Path, modid: str, locale: str, source_locale: str, entry_id: str, source_name: str
+) -> Path:
     locale_path = locale_pages_dir(root, modid, locale) / entry_id / source_name
     if locale_path.exists():
         return locale_path
@@ -575,6 +650,36 @@ def resolve_page_source_path(root: Path, modid: str, locale: str, entry_id: str,
     shared_path = shared_pages_dir(root, modid) / entry_id / source_name
     if shared_path.exists():
         return shared_path
+
+    if source_locale != locale:
+        source_locale_path = locale_pages_dir(root, modid, source_locale) / entry_id / source_name
+        if source_locale_path.exists():
+            return source_locale_path
+
+    raise ManualError(f"Missing page source: {locale_path} (fallback: {shared_path})")
+
+
+def load_resolved_markdown_document(
+    root: Path, modid: str, locale: str, source_locale: str, entry_id: str, source_name: str
+) -> tuple[dict[str, Any], str]:
+    shared_path = shared_pages_dir(root, modid) / entry_id / source_name
+    shared_frontmatter: dict[str, Any] = {}
+    shared_body = ""
+    if shared_path.exists():
+        shared_frontmatter, shared_body = load_markdown_document(shared_path)
+
+    locale_path = locale_pages_dir(root, modid, locale) / entry_id / source_name
+    if locale_path.exists():
+        locale_frontmatter, locale_body = load_markdown_document(locale_path)
+        shared_frontmatter.update(locale_frontmatter)
+        return shared_frontmatter, locale_body
+
+    if shared_path.exists():
+        return shared_frontmatter, shared_body
+
+    source_locale_path = locale_pages_dir(root, modid, source_locale) / entry_id / source_name
+    if source_locale_path.exists():
+        return load_markdown_document(source_locale_path)
 
     raise ManualError(f"Missing page source: {locale_path} (fallback: {shared_path})")
 
@@ -604,6 +709,21 @@ def page_translation_identifier(source_name: str | None, page_index: int) -> str
 
 def looks_like_translation_key(value: str) -> bool:
     return "." in value and " " not in value and bool(TRANSLATION_KEY_PATTERN.fullmatch(value))
+
+
+def ordered_patchouli_locales(locales: tuple[str, ...]) -> tuple[str, ...]:
+    return (DEFAULT_LOCALE,) + tuple(locale for locale in locales if locale != DEFAULT_LOCALE)
+
+
+def cleanup_patchouli_outputs(root: Path, modid: str, namespace: str, book_id: str) -> None:
+    paths = [
+        patchouli_book_output_path(root, modid, namespace, book_id).parent,
+        patchouli_assets_output_dir(root, modid, namespace, book_id),
+        patchouli_lang_output_path(root, modid, namespace, DEFAULT_LOCALE).parent,
+    ]
+    for path in paths:
+        if path.exists():
+            shutil.rmtree(path)
 
 
 def load_yaml_dict(path: Path) -> dict[str, Any]:

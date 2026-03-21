@@ -1,6 +1,6 @@
 ---
-title: "Explorer's Codex"
+title: "探索者の写本"
 item: apprenticecodex:explorers_codex
 ---
 
-A spellbook tuned for travel and reconnaissance. It comes preloaded with utility spells that help with movement, scouting, and staying aware of your surroundings while exploring.
+探索と索敵に向いた魔導書です。移動補助、周辺把握、探索支援に役立つ呪文があらかじめ収められており、冒険中の取り回しを重視した一冊になっています。

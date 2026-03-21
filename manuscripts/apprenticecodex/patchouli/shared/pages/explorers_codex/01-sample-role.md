@@ -1,5 +1,5 @@
 ---
-title: "Sample Role"
+title: "サンプル位置づけ"
 ---
 
-This entry is the smallest sample of a standalone Patchouli book with an `Items` category and a concrete child entry beneath it. More equipment or spell entries can be added beside it later.
+この entry は、独立した Patchouli book の `Items` カテゴリ配下に個別項目を置く最小サンプルです。今後は同じ形式で、装備や呪文の項目を横に増やせます。

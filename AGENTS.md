@@ -39,8 +39,9 @@ manuscripts/<modid>/patchouli/
 ```
 
 - `shared/` が説明書構造の正本で、`locales/<locale>/` は差分だけを持つ。
+- `shared/` は `book.yml` の `source_locale` で書かれた正本として扱う。
 - `pages/*.md` は YAML front matter と本文を持つ。
-- `book.yml` は共有メタデータを持ち、`locales` で生成対象 locale を列挙する。
+- `book.yml` は共有メタデータを持ち、`source_locale` と `locales` で原稿言語と生成対象 locale を列挙する。
 - 本文は当面 CommonMark 変換せず、Patchouli の `text` としてそのまま扱う。
 - `Modonomicon` への対応を意識しても、初期段階では強い抽象化を入れすぎない。
 
@@ -49,7 +50,10 @@ manuscripts/<modid>/patchouli/
 ```text
 docs/<modid>/patchouli/
   data/<namespace>/patchouli_books/<book_id>/book.json
-  assets/<namespace>/patchouli_books/<book_id>/<locale>/
+  assets/<namespace>/patchouli_books/<book_id>/en_us/
+    categories/*.json
+    entries/**/*.json
+  assets/<namespace>/patchouli_books/<book_id>/<locale>/   # 構造差分がある locale のみ
     categories/*.json
     entries/**/*.json
   assets/<namespace>/lang/<locale>.json
@@ -82,6 +86,7 @@ python -m uv run mod-manual build patchouli --mod <modid>
 
 - まず `mods.toml` を見て対象 MOD と有効形式を確認する。
 - `Patchouli` 作業では、`book.yml`、`shared/categories`、`shared/entries`、`shared/pages`、`locales/<locale>/...` のどれを変えるかを明示する。
+- `source_locale` が `en_us` 以外でも、生成物の基底は `en_us` として扱う。
 - ID を変更する場合は、参照元も合わせて確認する。
 - スキャフォールド追加時は、将来の手修正前提で読みやすいテンプレートを優先する。
 - `Modonomicon` のための構造を先回りして入れすぎず、必要になった時点で差分を増やす。

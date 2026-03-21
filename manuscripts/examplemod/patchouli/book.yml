@@ -1,5 +1,6 @@
 book_id: examplemod
 book_namespace: examplemod
+source_locale: en_us
 name: "Example Mod Manual"
 landing_text: |
   Welcome to the example manual.

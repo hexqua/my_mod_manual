@@ -1,6 +1,6 @@
 id: items
-name: "Items"
+name: "アイテム"
 description: |
-  This category groups item notes. For now it only contains Explorer's Codex as a simple Patchouli tree sample.
+  追加アイテムの説明をまとめるカテゴリです。今回は Patchouli のツリーサンプルとして、探索者の写本だけを配置しています。
 icon: apprenticecodex:explorers_codex
 sortnum: 0

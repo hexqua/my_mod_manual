@@ -1,5 +1,6 @@
 book_id: apprentice_codex
 book_namespace: apprenticecodex
+source_locale: ja_jp
 name: patchouli.apprenticecodex.apprentice_codex.name
 landing_text: patchouli.apprenticecodex.apprentice_codex.landing_text
 subtitle: patchouli.apprenticecodex.apprentice_codex.subtitle
