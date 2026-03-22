@@ -31,12 +31,12 @@ manuscripts/<modid>/patchouli/
   shared/
     categories/*.yml
     entries/**/*.yml
-    pages/<entry_id>/*.md
+    pages/<category_id>/<entry_id>/*.md
   locales/<locale>/
     book.yml                # 任意 override
     categories/*.yml        # 任意 override
     entries/**/*.yml        # 任意 override
-    pages/<entry_id>/*.md   # 任意 override
+    pages/<category_id>/<entry_id>/*.md   # 任意 override
 ```
 
 - `shared/` が説明書構造の正本で、`locales/<locale>/` は差分だけを持つ。

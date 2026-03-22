@@ -231,7 +231,16 @@ def build_patchouli_locale_outputs(
 
         resolved_pages = []
         for page_index, raw_page in enumerate(pages, start=1):
-            page, source_name = resolve_page(entry_path, raw_page, root, modid, locale, source_locale, entry_id)
+            page, source_name = resolve_page(
+                entry_path,
+                raw_page,
+                root,
+                modid,
+                locale,
+                source_locale,
+                category_id,
+                entry_id,
+            )
             page_identifier = page_translation_identifier(source_name, page_index)
             localize_mapping_field(
                 page,
@@ -377,7 +386,7 @@ def scaffold_entry(
 
     if locale is None:
         entry_path = shared_entries_dir(root, modid) / category_id / f"{entry_id}.yml"
-        page_dir = shared_pages_dir(root, modid) / entry_id
+        page_dir = shared_pages_dir(root, modid) / category_id / entry_id
         entry_lines = [
             f"id: {entry_id}",
             f'name: "{name}"',
@@ -391,7 +400,7 @@ def scaffold_entry(
         ]
     else:
         entry_path = locale_entries_dir(root, modid, locale) / category_id / f"{entry_id}.yml"
-        page_dir = locale_pages_dir(root, modid, locale) / entry_id
+        page_dir = locale_pages_dir(root, modid, locale) / category_id / entry_id
         entry_lines = [
             f"id: {entry_id}",
             f'name: "{name}"',
@@ -494,9 +503,16 @@ def validate_entry_document(entry_path: Path, entry: dict[str, Any], category_id
 
 
 def validate_entry_pages(
-    root: Path, modid: str, locale: str, entry_path: Path, entry: dict[str, Any], source_locale: str | None = None
+    root: Path,
+    modid: str,
+    locale: str,
+    entry_path: Path,
+    entry: dict[str, Any],
+    source_locale: str | None = None,
 ) -> None:
     entry_id = require_slug(entry.get("id"), f"{entry_path}: id")
+    category_id = require_slug(entry.get("category"), f"{entry_path}: category")
+    page_dir = page_dir_for_entry(category_id, entry_id)
     seen_sources: set[str] = set()
     for raw_page in entry.get("pages", []):
         source_name = raw_page.get("source")
@@ -508,7 +524,7 @@ def validate_entry_pages(
             raise ManualError(f"{entry_path}: duplicated page source '{source_text}'")
         seen_sources.add(source_text)
 
-        source_path = resolve_page_source_path(root, modid, locale, source_locale or locale, entry_id, source_text)
+        source_path = resolve_page_source_path(root, modid, locale, source_locale or locale, page_dir, source_text)
         try:
             load_markdown_document(source_path)
         except ManualError as exc:
@@ -642,6 +658,7 @@ def resolve_page(
     modid: str,
     locale: str,
     source_locale: str,
+    category_id: str,
     entry_id: str,
 ) -> tuple[dict[str, Any], str | None]:
     if not isinstance(raw_page, dict):
@@ -652,7 +669,14 @@ def resolve_page(
     source_text = str(source_name) if source_name else None
 
     if source_text:
-        frontmatter, body = load_resolved_markdown_document(root, modid, locale, source_locale, entry_id, source_text)
+        frontmatter, body = load_resolved_markdown_document(
+            root,
+            modid,
+            locale,
+            source_locale,
+            page_dir_for_entry(category_id, entry_id),
+            source_text,
+        )
         for key, value in frontmatter.items():
             page.setdefault(key, value)
         if body and "text" not in page:
@@ -667,18 +691,18 @@ def resolve_page(
 
 
 def resolve_page_source_path(
-    root: Path, modid: str, locale: str, source_locale: str, entry_id: str, source_name: str
+    root: Path, modid: str, locale: str, source_locale: str, entry_page_dir: Path, source_name: str
 ) -> Path:
-    locale_path = locale_pages_dir(root, modid, locale) / entry_id / source_name
+    locale_path = locale_pages_dir(root, modid, locale) / entry_page_dir / source_name
     if locale_path.exists():
         return locale_path
 
-    shared_path = shared_pages_dir(root, modid) / entry_id / source_name
+    shared_path = shared_pages_dir(root, modid) / entry_page_dir / source_name
     if shared_path.exists():
         return shared_path
 
     if source_locale != locale:
-        source_locale_path = locale_pages_dir(root, modid, source_locale) / entry_id / source_name
+        source_locale_path = locale_pages_dir(root, modid, source_locale) / entry_page_dir / source_name
         if source_locale_path.exists():
             return source_locale_path
 
@@ -686,15 +710,15 @@ def resolve_page_source_path(
 
 
 def load_resolved_markdown_document(
-    root: Path, modid: str, locale: str, source_locale: str, entry_id: str, source_name: str
+    root: Path, modid: str, locale: str, source_locale: str, entry_page_dir: Path, source_name: str
 ) -> tuple[dict[str, Any], str]:
-    shared_path = shared_pages_dir(root, modid) / entry_id / source_name
+    shared_path = shared_pages_dir(root, modid) / entry_page_dir / source_name
     shared_frontmatter: dict[str, Any] = {}
     shared_body = ""
     if shared_path.exists():
         shared_frontmatter, shared_body = load_markdown_document(shared_path)
 
-    locale_path = locale_pages_dir(root, modid, locale) / entry_id / source_name
+    locale_path = locale_pages_dir(root, modid, locale) / entry_page_dir / source_name
     if locale_path.exists():
         locale_frontmatter, locale_body = load_markdown_document(locale_path)
         shared_frontmatter.update(locale_frontmatter)
@@ -703,7 +727,7 @@ def load_resolved_markdown_document(
     if shared_path.exists():
         return shared_frontmatter, shared_body
 
-    source_locale_path = locale_pages_dir(root, modid, source_locale) / entry_id / source_name
+    source_locale_path = locale_pages_dir(root, modid, source_locale) / entry_page_dir / source_name
     if source_locale_path.exists():
         return load_markdown_document(source_locale_path)
 
@@ -864,6 +888,10 @@ def locale_entries_dir(root: Path, modid: str, locale: str) -> Path:
 
 def locale_pages_dir(root: Path, modid: str, locale: str) -> Path:
     return locale_root(root, modid, locale) / "pages"
+
+
+def page_dir_for_entry(category_id: str, entry_id: str) -> Path:
+    return Path(category_id) / entry_id
 
 
 def shared_category_paths(root: Path, modid: str) -> list[Path]:

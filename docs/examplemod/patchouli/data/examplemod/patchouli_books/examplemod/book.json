@@ -1,6 +1,6 @@
 {
-  "name": "patchouli.examplemod.examplemod.book.name",
-  "landing_text": "patchouli.examplemod.examplemod.book.landing_text",
+  "name": "patchouli.examplemod.examplemod.name",
+  "landing_text": "patchouli.examplemod.examplemod.landing_text",
   "version": 1,
   "i18n": true
 }

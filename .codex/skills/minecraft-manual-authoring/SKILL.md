@@ -46,7 +46,7 @@ Create `manuscripts/<modid>/patchouli/shared/categories/<category_id>.yml` for t
 Create or update:
 
 - `manuscripts/<modid>/patchouli/shared/entries/<entry_id>.yml`
-- `manuscripts/<modid>/patchouli/shared/pages/<entry_id>/00-*.md`
+- `manuscripts/<modid>/patchouli/shared/pages/<category_id>/<entry_id>/00-*.md`
 
 Use `locales/<locale>/entries/...` and `locales/<locale>/pages/...` only when a translation or locale-specific structure override is needed.
 

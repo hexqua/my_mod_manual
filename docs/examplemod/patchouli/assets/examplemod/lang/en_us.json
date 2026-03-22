@@ -1,6 +1,6 @@
 {
-  "patchouli.examplemod.examplemod.book.name": "Example Mod Manual",
-  "patchouli.examplemod.examplemod.book.landing_text": "Welcome to the example manual.\n",
+  "patchouli.examplemod.examplemod.name": "Example Mod Manual",
+  "patchouli.examplemod.examplemod.landing_text": "Welcome to the example manual.\n",
   "patchouli.examplemod.examplemod.category.getting_started.name": "Getting Started",
   "patchouli.examplemod.examplemod.category.getting_started.description": "Learn the initial workflow for this mod.\n",
   "patchouli.examplemod.examplemod.entry.first_steps.name": "First Steps",
