@@ -89,6 +89,8 @@ python -m uv run mod-manual build patchouli --mod <modid>
 - まず `mods.toml` を見て対象 MOD と有効形式を確認する。
 - `Patchouli` 作業では、`book.yml`、`shared/categories`、`shared/entries`、`shared/pages`、`locales/<locale>/...` のどれを変えるかを明示する。
 - `source_locale` が `en_us` 以外でも、生成物の基底は `en_us` として扱う。
+- `source_locale` が `en_us` 以外で `shared/pages/...` に本文付きページを足した場合、通常ビルド前に `python -m uv run mod-manual sync en-us-stubs --mod <modid>` で `locales/en_us/pages/...` の不足 stub を補う。
+- `translation_status: stub` が付いた `locales/en_us/pages/...` は暫定原稿として扱い、最終的には翻訳して marker を消してから通常 `validate` を通す。
 - ID を変更する場合は、参照元も合わせて確認する。
 - スキャフォールド追加時は、将来の手修正前提で読みやすいテンプレートを優先する。
 - `Modonomicon` のための構造を先回りして入れすぎず、必要になった時点で差分を増やす。
@@ -96,6 +98,7 @@ python -m uv run mod-manual build patchouli --mod <modid>
 ## 8. 最低限の確認
 
 - 原稿追加や更新後は `validate` を実行する。
+- 暫定 `en_us` stub で表示確認する間だけ `validate --allow-en-us-stubs` を使い、通常確認では stub 残存をエラーとして扱う。
 - `Patchouli` 向け変更後は `build patchouli` を実行し、`docs/` 配下の出力を確認する。
 - 新しい原稿パターンを導入した場合は、最低 1 件のサンプルを追加する。
 

@@ -20,6 +20,8 @@ BOOK_TRANSLATABLE_FIELDS = ("name", "landing_text", "subtitle")
 CATEGORY_TRANSLATABLE_FIELDS = ("name", "description")
 ENTRY_TRANSLATABLE_FIELDS = ("name",)
 PAGE_TRANSLATABLE_FIELDS = ("title", "text")
+TRANSLATION_STATUS_FIELD = "translation_status"
+TRANSLATION_STUB_VALUE = "stub"
 
 
 class ManualError(Exception):
@@ -74,13 +76,13 @@ def select_mods(manifest: Manifest, modid: str | None) -> tuple[ModSpec, ...]:
     return tuple(selected)
 
 
-def validate_repository(root: Path, modid: str | None = None) -> list[str]:
+def validate_repository(root: Path, modid: str | None = None, allow_en_us_stubs: bool = False) -> list[str]:
     manifest = load_manifest(root)
     errors: list[str] = []
 
     for mod in select_mods(manifest, modid):
         if "patchouli" in mod.enabled_formats:
-            errors.extend(validate_patchouli(root, mod))
+            errors.extend(validate_patchouli(root, mod, allow_en_us_stubs=allow_en_us_stubs))
 
     return errors
 
@@ -431,7 +433,59 @@ def scaffold_entry(
     return [entry_path, page_path]
 
 
-def validate_patchouli(root: Path, mod: ModSpec) -> list[str]:
+def sync_en_us_stubs(root: Path, modid: str | None = None) -> list[Path]:
+    manifest = load_manifest(root)
+    created: list[Path] = []
+
+    for mod in select_mods(manifest, modid):
+        if "patchouli" not in mod.enabled_formats:
+            continue
+
+        _, _, _, source_locale, _ = load_book_settings(root, mod.modid)
+        if source_locale == DEFAULT_LOCALE:
+            continue
+
+        shared_entries = load_shared_entries(root, mod.modid)
+        entry_overrides = load_locale_entry_overrides(root, mod.modid, DEFAULT_LOCALE, shared_entries)
+
+        for relative_path in sorted(shared_entries, key=lambda item: item.as_posix()):
+            entry_path, shared_entry = shared_entries[relative_path]
+            entry = merge_patchouli_document(shared_entry, entry_overrides.get(relative_path))
+            entry_id = require_slug(entry.get("id"), f"{entry_path}: id")
+            category_id = require_slug(entry.get("category"), f"{entry_path}: category")
+            page_dir = page_dir_for_entry(category_id, entry_id)
+
+            for raw_page in entry.get("pages", []):
+                if not isinstance(raw_page, dict):
+                    continue
+
+                source_name = raw_page.get("source")
+                if not source_name:
+                    continue
+
+                source_text = str(source_name)
+                if not page_requires_default_locale_translation(root, mod.modid, source_locale, page_dir, source_text):
+                    continue
+
+                locale_path = locale_pages_dir(root, mod.modid, DEFAULT_LOCALE) / page_dir / source_text
+                if locale_path.exists():
+                    continue
+
+                source_frontmatter, source_body = load_source_locale_markdown_document(
+                    root,
+                    mod.modid,
+                    source_locale,
+                    page_dir,
+                    source_text,
+                )
+                stub_frontmatter, stub_body = build_en_us_stub_page(source_frontmatter, source_body, source_locale)
+                write_markdown_document(locale_path, stub_frontmatter, stub_body)
+                created.append(locale_path)
+
+    return created
+
+
+def validate_patchouli(root: Path, mod: ModSpec, allow_en_us_stubs: bool = False) -> list[str]:
     errors: list[str] = []
     book_path = patchouli_dir(root, mod.modid) / "book.yml"
     if not book_path.exists():
@@ -450,7 +504,14 @@ def validate_patchouli(root: Path, mod: ModSpec) -> list[str]:
     for relative_path, (entry_path, entry) in shared_entries.items():
         try:
             validate_entry_document(entry_path, entry, set(shared_categories))
-            validate_entry_pages(root, mod.modid, source_locale, entry_path, entry)
+            validate_entry_pages(
+                root,
+                mod.modid,
+                source_locale,
+                entry_path,
+                entry,
+                allow_en_us_stubs=allow_en_us_stubs,
+            )
         except ManualError as exc:
             errors.append(str(exc))
 
@@ -474,7 +535,15 @@ def validate_patchouli(root: Path, mod: ModSpec) -> list[str]:
                     errors.append(f"{shared_path}: duplicated entry id '{entry_id}'")
                 entries_seen.add(entry_id)
                 validate_entry_document(shared_path, entry, set(shared_categories))
-                validate_entry_pages(root, mod.modid, locale, shared_path, entry, source_locale)
+                validate_entry_pages(
+                    root,
+                    mod.modid,
+                    locale,
+                    shared_path,
+                    entry,
+                    source_locale,
+                    allow_en_us_stubs=allow_en_us_stubs,
+                )
             except ManualError as exc:
                 errors.append(str(exc))
 
@@ -509,6 +578,7 @@ def validate_entry_pages(
     entry_path: Path,
     entry: dict[str, Any],
     source_locale: str | None = None,
+    allow_en_us_stubs: bool = False,
 ) -> None:
     entry_id = require_slug(entry.get("id"), f"{entry_path}: id")
     category_id = require_slug(entry.get("category"), f"{entry_path}: category")
@@ -524,7 +594,20 @@ def validate_entry_pages(
             raise ManualError(f"{entry_path}: duplicated page source '{source_text}'")
         seen_sources.add(source_text)
 
-        source_path = resolve_page_source_path(root, modid, locale, source_locale or locale, page_dir, source_text)
+        resolved_source_locale = source_locale or locale
+        if locale == DEFAULT_LOCALE and resolved_source_locale != DEFAULT_LOCALE:
+            validate_default_locale_page_source(
+                root,
+                modid,
+                entry_path,
+                resolved_source_locale,
+                page_dir,
+                source_text,
+                allow_en_us_stubs,
+            )
+            continue
+
+        source_path = resolve_page_source_path(root, modid, locale, resolved_source_locale, page_dir, source_text)
         try:
             load_markdown_document(source_path)
         except ManualError as exc:
@@ -669,15 +752,12 @@ def resolve_page(
     source_text = str(source_name) if source_name else None
 
     if source_text:
-        frontmatter, body = load_resolved_markdown_document(
-            root,
-            modid,
-            locale,
-            source_locale,
-            page_dir_for_entry(category_id, entry_id),
-            source_text,
-        )
-        for key, value in frontmatter.items():
+        page_dir = page_dir_for_entry(category_id, entry_id)
+        if locale == DEFAULT_LOCALE and source_locale != DEFAULT_LOCALE:
+            frontmatter, body = load_default_locale_markdown_document(root, modid, source_locale, page_dir, source_text)
+        else:
+            frontmatter, body = load_resolved_markdown_document(root, modid, locale, source_locale, page_dir, source_text)
+        for key, value in strip_internal_fields(frontmatter).items():
             page.setdefault(key, value)
         if body and "text" not in page:
             page["text"] = body
@@ -732,6 +812,116 @@ def load_resolved_markdown_document(
         return load_markdown_document(source_locale_path)
 
     raise ManualError(f"Missing page source: {locale_path} (fallback: {shared_path})")
+
+
+def load_default_locale_markdown_document(
+    root: Path, modid: str, source_locale: str, entry_page_dir: Path, source_name: str
+) -> tuple[dict[str, Any], str]:
+    source_frontmatter, source_body = load_source_locale_markdown_document(root, modid, source_locale, entry_page_dir, source_name)
+    if not page_has_translatable_content(source_frontmatter, source_body):
+        return source_frontmatter, source_body
+
+    locale_path = locale_pages_dir(root, modid, DEFAULT_LOCALE) / entry_page_dir / source_name
+    if not locale_path.exists():
+        raise ManualError(f"Missing default locale page source: {locale_path} (source locale: {source_locale})")
+
+    locale_frontmatter, locale_body = load_markdown_document(locale_path)
+    ensure_default_locale_page_translation(locale_path, source_frontmatter, source_body, locale_frontmatter, locale_body)
+
+    merged_frontmatter = dict(strip_internal_fields(source_frontmatter))
+    merged_frontmatter.update(strip_internal_fields(locale_frontmatter))
+    return merged_frontmatter, locale_body
+
+
+def load_source_locale_markdown_document(
+    root: Path, modid: str, source_locale: str, entry_page_dir: Path, source_name: str
+) -> tuple[dict[str, Any], str]:
+    return load_resolved_markdown_document(root, modid, source_locale, source_locale, entry_page_dir, source_name)
+
+
+def page_has_translatable_content(frontmatter: dict[str, Any], body: str) -> bool:
+    return bool(frontmatter.get("title")) or bool(resolve_page_text_value(frontmatter, body))
+
+
+def resolve_page_text_value(frontmatter: dict[str, Any], body: str) -> str:
+    text_value = frontmatter.get("text")
+    if isinstance(text_value, str) and text_value:
+        return text_value
+    return body
+
+
+def validate_default_locale_page_source(
+    root: Path,
+    modid: str,
+    entry_path: Path,
+    source_locale: str,
+    entry_page_dir: Path,
+    source_name: str,
+    allow_en_us_stubs: bool,
+) -> None:
+    source_frontmatter, source_body = load_source_locale_markdown_document(root, modid, source_locale, entry_page_dir, source_name)
+    if not page_has_translatable_content(source_frontmatter, source_body):
+        return
+
+    locale_path = locale_pages_dir(root, modid, DEFAULT_LOCALE) / entry_page_dir / source_name
+    if not locale_path.exists():
+        raise ManualError(f"{entry_path}: missing default locale page source '{locale_path}' for '{source_name}'")
+
+    locale_frontmatter, locale_body = load_markdown_document(locale_path)
+    ensure_default_locale_page_translation(locale_path, source_frontmatter, source_body, locale_frontmatter, locale_body)
+
+    if not allow_en_us_stubs and is_translation_stub(locale_frontmatter):
+        raise ManualError(f"{locale_path}: en_us stub remains; translate it or use --allow-en-us-stubs")
+
+
+def ensure_default_locale_page_translation(
+    locale_path: Path,
+    source_frontmatter: dict[str, Any],
+    source_body: str,
+    locale_frontmatter: dict[str, Any],
+    locale_body: str,
+) -> None:
+    source_title = source_frontmatter.get("title")
+    if isinstance(source_title, str) and source_title and not locale_frontmatter.get("title"):
+        raise ManualError(f"{locale_path}: missing translated title for en_us")
+
+    if resolve_page_text_value(source_frontmatter, source_body) and not resolve_page_text_value(locale_frontmatter, locale_body):
+        raise ManualError(f"{locale_path}: missing translated text for en_us")
+
+
+def page_requires_default_locale_translation(
+    root: Path, modid: str, source_locale: str, entry_page_dir: Path, source_name: str
+) -> bool:
+    source_frontmatter, source_body = load_source_locale_markdown_document(root, modid, source_locale, entry_page_dir, source_name)
+    return page_has_translatable_content(source_frontmatter, source_body)
+
+
+def build_en_us_stub_page(
+    source_frontmatter: dict[str, Any], source_body: str, source_locale: str
+) -> tuple[dict[str, Any], str]:
+    frontmatter: dict[str, Any] = {TRANSLATION_STATUS_FIELD: TRANSLATION_STUB_VALUE}
+
+    source_title = source_frontmatter.get("title")
+    if isinstance(source_title, str) and source_title:
+        frontmatter["title"] = f"TODO: Translate - {source_title}"
+
+    body = ""
+    if resolve_page_text_value(source_frontmatter, source_body):
+        body = f"TODO: This page is not translated yet. Source locale: {source_locale}."
+
+    return frontmatter, body
+
+
+def strip_internal_fields(payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: value
+        for key, value in payload.items()
+        if key != TRANSLATION_STATUS_FIELD
+    }
+
+
+def is_translation_stub(frontmatter: dict[str, Any]) -> bool:
+    return frontmatter.get(TRANSLATION_STATUS_FIELD) == TRANSLATION_STUB_VALUE
 
 
 def localize_mapping_field(payload: dict[str, Any], field: str, key: str, lang_entries: dict[str, str]) -> None:
@@ -828,6 +1018,16 @@ def load_markdown_document(path: Path) -> tuple[dict[str, Any], str]:
     if not isinstance(frontmatter, dict):
         raise ManualError(f"{path}: front matter must be a YAML mapping")
     return frontmatter, body.strip()
+
+
+def write_markdown_document(path: Path, frontmatter: dict[str, Any], body: str) -> None:
+    lines: list[str] = []
+    if frontmatter:
+        lines.extend(["---", yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False).strip(), "---", ""])
+    if body:
+        lines.extend([body, ""])
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines), encoding="utf-8")
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
