@@ -1,8 +1,14 @@
 id: recommended_flow_01
-name: "おすすめ進行 1"
+name: "最初の魔法を使うまで"
 category: apprentice_guide
 icon: minecraft:book
 sortnum: 0
 pages:
   - type: text
     source: 00-overview.md
+  - type: text
+    source: 01-prepare.md
+  - type: crafting
+    source: 02-craft.md
+  - type: text
+    source: 03-usage.md
