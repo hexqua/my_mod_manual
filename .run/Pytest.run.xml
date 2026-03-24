@@ -13,9 +13,9 @@
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-    <option name="RUN_TOOL" value="true" />
-    <option name="SCRIPT_NAME" value="uv" />
-    <option name="PARAMETERS" value="run pytest" />
+    <option name="RUN_TOOL" value="false" />
+    <option name="SCRIPT_NAME" value="pytest" />
+    <option name="PARAMETERS" value="" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="true" />

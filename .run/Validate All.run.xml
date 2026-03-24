@@ -1,5 +1,5 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Validate Manuals Allow Stab" type="PythonConfigurationType" factoryName="Python" folderName="Apprentice'Codex">
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Validate All" type="PythonConfigurationType" factoryName="Python">
     <module name="my_mod_manual" />
     <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />
@@ -14,8 +14,8 @@
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
     <option name="RUN_TOOL" value="true" />
-    <option name="SCRIPT_NAME" value="uv" />
-    <option name="PARAMETERS" value="run mod-manual validate --mod apprenticecodex" />
+    <option name="SCRIPT_NAME" value="my_mod_manual.cli" />
+    <option name="PARAMETERS" value="validate" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="true" />

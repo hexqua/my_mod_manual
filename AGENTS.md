@@ -72,16 +72,18 @@ docs/<modid>/patchouli/
 
 ## 6. CLI 作業ルール
 
-- 依存管理と実行は `uv` を使う。
-- `uv` が PATH に無い環境では `python -m uv` を使う。
+- `.venv` の作成と依存同期には `uv sync` を使う。
+- 日常の `validate`、`build`、`sync en-us-stubs`、`scaffold`、`pytest` はプロジェクトの `.venv` を直接使う。
+- PyCharm では Project Interpreter を `$PROJECT_DIR$/.venv/Scripts/python.exe` に固定する。
 - 実装追加時は、可能なら `validate` と `build patchouli` が通るサンプルを維持する。
 
 基本コマンド:
 
 ```powershell
-python -m uv sync
-python -m uv run mod-manual validate
-python -m uv run mod-manual build patchouli --mod <modid>
+uv sync
+.\.venv\Scripts\python.exe -m my_mod_manual.cli validate
+.\.venv\Scripts\python.exe -m my_mod_manual.cli build patchouli --mod <modid>
+.\.venv\Scripts\python.exe -m pytest
 ```
 
 ## 7. エージェント向け実務ルール
@@ -89,7 +91,7 @@ python -m uv run mod-manual build patchouli --mod <modid>
 - まず `mods.toml` を見て対象 MOD と有効形式を確認する。
 - `Patchouli` 作業では、`book.yml`、`shared/categories`、`shared/entries`、`shared/pages`、`locales/<locale>/...` のどれを変えるかを明示する。
 - `source_locale` が `en_us` 以外でも、生成物の基底は `en_us` として扱う。
-- `source_locale` が `en_us` 以外で `shared/pages/...` に本文付きページを足した場合、通常ビルド前に `python -m uv run mod-manual sync en-us-stubs --mod <modid>` で `locales/en_us/pages/...` の不足 stub を補う。
+- `source_locale` が `en_us` 以外で `shared/pages/...` に本文付きページを足した場合、通常ビルド前に `.\.venv\Scripts\python.exe -m my_mod_manual.cli sync en-us-stubs --mod <modid>` で `locales/en_us/pages/...` の不足 stub を補う。
 - `translation_status: stub` が付いた `locales/en_us/pages/...` は暫定原稿として扱い、最終的には翻訳して marker を消してから通常 `validate` を通す。
 - ID を変更する場合は、参照元も合わせて確認する。
 - スキャフォールド追加時は、将来の手修正前提で読みやすいテンプレートを優先する。
