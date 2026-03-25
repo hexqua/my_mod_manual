@@ -1,0 +1,13 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.reservoir.name",
+  "category": "apprenticecodex:enchantments",
+  "icon": "minecraft:enchanted_book",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.reservoir.page.00_overview.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.reservoir.page.00_overview.text"
+    }
+  ]
+}

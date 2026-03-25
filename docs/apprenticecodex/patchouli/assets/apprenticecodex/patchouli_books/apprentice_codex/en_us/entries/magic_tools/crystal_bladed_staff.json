@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.crystal_bladed_staff.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:crystal_bladed_staff",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.crystal_bladed_staff.page.00_spotlight.title",
+      "item": "apprenticecodex:crystal_bladed_staff",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.crystal_bladed_staff.page.00_spotlight.text"
+    }
+  ]
+}

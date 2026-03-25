@@ -1,0 +1,10 @@
+id: spell_amplifier_series
+name: "魔力増幅装置系"
+category: magic_tools
+icon: apprenticecodex:iron_spell_amplifier
+sortnum: 3
+pages:
+  - type: spotlight
+    source: 00-spotlight.md
+  - type: text
+    source: 01-coverage.md

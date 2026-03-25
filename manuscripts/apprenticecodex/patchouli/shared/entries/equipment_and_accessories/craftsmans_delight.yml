@@ -1,0 +1,8 @@
+id: craftsmans_delight
+name: "職人の歓喜"
+category: equipment_and_accessories
+icon: apprenticecodex:craftsmans_delight
+sortnum: 4
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

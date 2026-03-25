@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.arcanum_in_a_jar.name",
+  "category": "apprenticecodex:devices",
+  "icon": "apprenticecodex:arcanum_in_a_jar",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.arcanum_in_a_jar.page.00_spotlight.title",
+      "item": "apprenticecodex:arcanum_in_a_jar",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.arcanum_in_a_jar.page.00_spotlight.text"
+    }
+  ]
+}

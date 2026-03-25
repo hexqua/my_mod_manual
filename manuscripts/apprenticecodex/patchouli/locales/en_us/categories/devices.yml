@@ -1,0 +1,4 @@
+id: devices
+name: "Devices"
+description: |
+  A category for currently implemented block-based content. Each entry is a stub that will be expanded later.

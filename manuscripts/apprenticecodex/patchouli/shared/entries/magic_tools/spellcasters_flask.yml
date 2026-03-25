@@ -1,0 +1,8 @@
+id: spellcasters_flask
+name: "魔術詠唱者のフラスコ"
+category: magic_tools
+icon: apprenticecodex:spellcasters_flask
+sortnum: 6
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

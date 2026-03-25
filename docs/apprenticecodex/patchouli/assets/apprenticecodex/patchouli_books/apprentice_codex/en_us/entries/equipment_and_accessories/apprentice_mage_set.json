@@ -1,0 +1,19 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.apprentice_mage_set.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:apprentice_mage_torso",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.apprentice_mage_set.page.00_spotlight.title",
+      "item": "apprenticecodex:apprentice_mage_torso",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.apprentice_mage_set.page.00_spotlight.text"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.apprentice_mage_set.page.01_coverage.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.apprentice_mage_set.page.01_coverage.text"
+    }
+  ]
+}

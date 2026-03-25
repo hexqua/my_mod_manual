@@ -6,10 +6,18 @@
 mods.toml
 manuscripts/<modid>/patchouli/
   book.yml
-  categories/*.yml
-  entries/*.yml
-  pages/<entry_id>/*.md
-docs/<modid>/patchouli/<locale>/
+  shared/
+    categories/*.yml
+    entries/**/*.yml
+    pages/<entry_id>/*.md
+  locales/<locale>/
+    book.yml
+    categories/*.yml
+    entries/**/*.yml
+    pages/<entry_id>/*.md
+docs/<modid>/patchouli/data/<namespace>/patchouli_books/<book_id>/book.json
+docs/<modid>/patchouli/assets/<namespace>/patchouli_books/<book_id>/en_us/
+docs/<modid>/patchouli/assets/<namespace>/lang/<locale>.json
 docs/<modid>/modonomicon/
 ```
 
@@ -21,17 +29,23 @@ docs/<modid>/modonomicon/
 
 ## Minimal File Patterns
 
+`shared/` is the manuscript written in `book.yml` `source_locale`. `locales/<locale>/book.yml` is for translated book title, subtitle, and landing text. Other `locales/<locale>/` files are only for overrides.
+
 ### `book.yml`
 
 ```yaml
+book_id: examplemod
+book_namespace: examplemod
+source_locale: en_us
 name: "Example Mod Manual"
 landing_text: |
   Welcome text here.
 version: 1
-i18n: en_us
+locales:
+  - en_us
 ```
 
-### `categories/<category_id>.yml`
+### `shared/categories/<category_id>.yml`
 
 ```yaml
 id: getting_started
@@ -42,7 +56,7 @@ icon: minecraft:book
 sortnum: 0
 ```
 
-### `entries/<entry_id>.yml`
+### `shared/entries/<entry_id>.yml`
 
 ```yaml
 id: first_steps
@@ -55,7 +69,7 @@ pages:
     source: 00-introduction.md
 ```
 
-### `pages/<entry_id>/00-introduction.md`
+### `shared/pages/<entry_id>/00-introduction.md`
 
 ```md
 ---
@@ -69,3 +83,4 @@ Write Patchouli text here.
 - Modify manuscript sources instead of generated files.
 - Reuse the repository sample under `manuscripts/examplemod/patchouli/` when unsure.
 - Keep scaffolds compact so the user can revise them manually.
+- When only translated text changes, prefer `locales/<locale>/` overrides and let non-`en_us` JSON be omitted.

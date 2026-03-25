@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.ender_grimoire.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:ender_grimoire",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.ender_grimoire.page.00_spotlight.title",
+      "item": "apprenticecodex:ender_grimoire",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.ender_grimoire.page.00_spotlight.text"
+    }
+  ]
+}

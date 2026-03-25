@@ -10,6 +10,7 @@ from .project import (
     scaffold_category,
     scaffold_entry,
     scaffold_mod,
+    sync_en_us_stubs,
     validate_repository,
 )
 
@@ -21,9 +22,11 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         if args.command == "validate":
-            return run_validate(root, args.mod)
+            return run_validate(root, args.mod, args.allow_en_us_stubs)
         if args.command == "build":
             return run_build(root, args.format, args.mod)
+        if args.command == "sync":
+            return run_sync(root, args.sync_target, args.mod)
         if args.command == "scaffold":
             return run_scaffold(root, args)
     except ManualError as exc:
@@ -40,11 +43,24 @@ def build_parser() -> argparse.ArgumentParser:
 
     validate_parser = subparsers.add_parser("validate", help="Validate manuscripts for one or all mods.")
     validate_parser.add_argument("--mod", help="Only validate the selected modid.")
+    validate_parser.add_argument(
+        "--allow-en-us-stubs",
+        action="store_true",
+        help="Allow en_us placeholder stub pages created for translation work-in-progress.",
+    )
 
     build_parser = subparsers.add_parser("build", help="Build generated assets.")
     build_subparsers = build_parser.add_subparsers(dest="format", required=True)
     patchouli_build = build_subparsers.add_parser("patchouli", help="Build Patchouli JSON files.")
     patchouli_build.add_argument("--mod", help="Only build the selected modid.")
+
+    sync_parser = subparsers.add_parser("sync", help="Synchronize helper manuscript files.")
+    sync_subparsers = sync_parser.add_subparsers(dest="sync_target", required=True)
+    en_us_stubs_parser = sync_subparsers.add_parser(
+        "en-us-stubs",
+        help="Create missing en_us page stubs for source locales other than en_us.",
+    )
+    en_us_stubs_parser.add_argument("--mod", help="Only sync the selected modid.")
 
     scaffold_parser = subparsers.add_parser("scaffold", help="Create manuscript skeletons.")
     scaffold_subparsers = scaffold_parser.add_subparsers(dest="scaffold_target", required=True)
@@ -57,18 +73,20 @@ def build_parser() -> argparse.ArgumentParser:
     scaffold_category_parser.add_argument("modid")
     scaffold_category_parser.add_argument("category_id")
     scaffold_category_parser.add_argument("--name", required=True)
+    scaffold_category_parser.add_argument("--locale", help="Create a locale override instead of a shared source.")
 
     scaffold_entry_parser = scaffold_subparsers.add_parser("entry", help="Create an entry and first page.")
     scaffold_entry_parser.add_argument("modid")
     scaffold_entry_parser.add_argument("entry_id")
     scaffold_entry_parser.add_argument("--category", required=True)
     scaffold_entry_parser.add_argument("--name", required=True)
+    scaffold_entry_parser.add_argument("--locale", help="Create a locale override instead of a shared source.")
 
     return parser
 
 
-def run_validate(root: Path, modid: str | None) -> int:
-    errors = validate_repository(root, modid)
+def run_validate(root: Path, modid: str | None, allow_en_us_stubs: bool) -> int:
+    errors = validate_repository(root, modid, allow_en_us_stubs=allow_en_us_stubs)
     if errors:
         for error in errors:
             print(error, file=sys.stderr)
@@ -91,13 +109,25 @@ def run_build(root: Path, format_name: str, modid: str | None) -> int:
     return 0
 
 
+def run_sync(root: Path, sync_target: str, modid: str | None) -> int:
+    if sync_target != "en-us-stubs":
+        raise ManualError(f"Unsupported sync target: {sync_target}")
+
+    created_files = sync_en_us_stubs(root, modid)
+    for path in created_files:
+        print(path.relative_to(root))
+    if not created_files:
+        print("No files were written.")
+    return 0
+
+
 def run_scaffold(root: Path, args: argparse.Namespace) -> int:
     if args.scaffold_target == "mod":
         created = scaffold_mod(root, args.modid, args.name)
     elif args.scaffold_target == "category":
-        created = [scaffold_category(root, args.modid, args.category_id, args.name)]
+        created = [scaffold_category(root, args.modid, args.category_id, args.name, args.locale)]
     elif args.scaffold_target == "entry":
-        created = scaffold_entry(root, args.modid, args.entry_id, args.category, args.name)
+        created = scaffold_entry(root, args.modid, args.entry_id, args.category, args.name, args.locale)
     else:
         raise ManualError(f"Unsupported scaffold target: {args.scaffold_target}")
 

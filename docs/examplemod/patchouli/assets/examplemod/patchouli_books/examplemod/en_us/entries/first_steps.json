@@ -1,0 +1,18 @@
+{
+  "name": "patchouli.examplemod.examplemod.entry.first_steps.name",
+  "category": "examplemod:getting_started",
+  "icon": "minecraft:paper",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.examplemod.examplemod.entry.first_steps.page.00_introduction.title",
+      "text": "patchouli.examplemod.examplemod.entry.first_steps.page.00_introduction.text"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.examplemod.examplemod.entry.first_steps.page.01_next_steps.title",
+      "text": "patchouli.examplemod.examplemod.entry.first_steps.page.01_next_steps.text"
+    }
+  ]
+}

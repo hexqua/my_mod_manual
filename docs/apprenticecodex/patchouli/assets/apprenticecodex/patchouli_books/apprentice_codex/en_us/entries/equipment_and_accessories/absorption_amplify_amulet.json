@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.absorption_amplify_amulet.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:absorption_amplify_amulet",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.absorption_amplify_amulet.page.00_spotlight.title",
+      "item": "apprenticecodex:absorption_amplify_amulet",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.absorption_amplify_amulet.page.00_spotlight.text"
+    }
+  ]
+}

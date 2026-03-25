@@ -1,0 +1,8 @@
+id: atelier_station
+name: "アトリエステーション"
+category: devices
+icon: apprenticecodex:atelier_station
+sortnum: 4
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

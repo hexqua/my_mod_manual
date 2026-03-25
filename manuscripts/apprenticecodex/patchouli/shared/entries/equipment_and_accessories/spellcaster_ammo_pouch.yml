@@ -1,0 +1,8 @@
+id: spellcaster_ammo_pouch
+name: "詠唱者の弾薬ポーチ"
+category: equipment_and_accessories
+icon: apprenticecodex:spellcaster_ammo_pouch
+sortnum: 7
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

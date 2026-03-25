@@ -1,0 +1,19 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.stealth_rune_set.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:stealth_rune_armor_body",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.stealth_rune_set.page.00_spotlight.title",
+      "item": "apprenticecodex:stealth_rune_armor_body",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.stealth_rune_set.page.00_spotlight.text"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.stealth_rune_set.page.01_coverage.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.stealth_rune_set.page.01_coverage.text"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.protection_spell_supporter.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:protection_spell_supporter",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.protection_spell_supporter.page.00_spotlight.title",
+      "item": "apprenticecodex:protection_spell_supporter",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.protection_spell_supporter.page.00_spotlight.text"
+    }
+  ]
+}

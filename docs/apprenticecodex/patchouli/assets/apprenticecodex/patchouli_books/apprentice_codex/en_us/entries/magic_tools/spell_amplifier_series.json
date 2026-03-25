@@ -1,0 +1,19 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.spell_amplifier_series.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:iron_spell_amplifier",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.spell_amplifier_series.page.00_spotlight.title",
+      "item": "apprenticecodex:iron_spell_amplifier",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.spell_amplifier_series.page.00_spotlight.text"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.spell_amplifier_series.page.01_coverage.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.spell_amplifier_series.page.01_coverage.text"
+    }
+  ]
+}

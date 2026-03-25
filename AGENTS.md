@@ -28,14 +28,38 @@
 ```text
 manuscripts/<modid>/patchouli/
   book.yml
-  categories/*.yml
-  entries/*.yml
-  pages/<entry_id>/*.md
+  shared/
+    categories/*.yml
+    entries/**/*.yml
+    pages/<category_id>/<entry_id>/*.md
+  locales/<locale>/
+    book.yml                # 任意 override
+    categories/*.yml        # 任意 override
+    entries/**/*.yml        # 任意 override
+    pages/<category_id>/<entry_id>/*.md   # 任意 override
 ```
 
+- `shared/` が説明書構造の正本で、`locales/<locale>/` は差分だけを持つ。
+- `shared/` は `book.yml` の `source_locale` で書かれた正本として扱う。
+- `locales/<locale>/book.yml` では書籍タイトルや導入文の翻訳差分を持てる。
 - `pages/*.md` は YAML front matter と本文を持つ。
+- `book.yml` は共有メタデータを持ち、`source_locale` と `locales` で原稿言語と生成対象 locale を列挙する。
 - 本文は当面 CommonMark 変換せず、Patchouli の `text` としてそのまま扱う。
 - `Modonomicon` への対応を意識しても、初期段階では強い抽象化を入れすぎない。
+
+- `Patchouli` の生成物は次の構成を前提とする。
+
+```text
+docs/<modid>/patchouli/
+  data/<namespace>/patchouli_books/<book_id>/book.json
+  assets/<namespace>/patchouli_books/<book_id>/en_us/
+    categories/*.json
+    entries/**/*.json
+  assets/<namespace>/patchouli_books/<book_id>/<locale>/   # 構造差分がある locale のみ
+    categories/*.json
+    entries/**/*.json
+  assets/<namespace>/lang/<locale>.json
+```
 
 ## 5. 変更時の優先順位
 
@@ -48,22 +72,27 @@ manuscripts/<modid>/patchouli/
 
 ## 6. CLI 作業ルール
 
-- 依存管理と実行は `uv` を使う。
-- `uv` が PATH に無い環境では `python -m uv` を使う。
+- `.venv` の作成と依存同期には `uv sync` を使う。
+- 日常の `validate`、`build`、`sync en-us-stubs`、`scaffold`、`pytest` はプロジェクトの `.venv` を直接使う。
+- PyCharm では Project Interpreter を `$PROJECT_DIR$/.venv/Scripts/python.exe` に固定する。
 - 実装追加時は、可能なら `validate` と `build patchouli` が通るサンプルを維持する。
 
 基本コマンド:
 
 ```powershell
-python -m uv sync
-python -m uv run mod-manual validate
-python -m uv run mod-manual build patchouli --mod <modid>
+uv sync
+.\.venv\Scripts\python.exe -m my_mod_manual.cli validate
+.\.venv\Scripts\python.exe -m my_mod_manual.cli build patchouli --mod <modid>
+.\.venv\Scripts\python.exe -m pytest
 ```
 
 ## 7. エージェント向け実務ルール
 
 - まず `mods.toml` を見て対象 MOD と有効形式を確認する。
-- `Patchouli` 作業では、`book.yml`、`categories`、`entries`、`pages` のどれを変えるかを明示する。
+- `Patchouli` 作業では、`book.yml`、`shared/categories`、`shared/entries`、`shared/pages`、`locales/<locale>/...` のどれを変えるかを明示する。
+- `source_locale` が `en_us` 以外でも、生成物の基底は `en_us` として扱う。
+- `source_locale` が `en_us` 以外で `shared/pages/...` に本文付きページを足した場合、通常ビルド前に `.\.venv\Scripts\python.exe -m my_mod_manual.cli sync en-us-stubs --mod <modid>` で `locales/en_us/pages/...` の不足 stub を補う。
+- `translation_status: stub` が付いた `locales/en_us/pages/...` は暫定原稿として扱い、最終的には翻訳して marker を消してから通常 `validate` を通す。
 - ID を変更する場合は、参照元も合わせて確認する。
 - スキャフォールド追加時は、将来の手修正前提で読みやすいテンプレートを優先する。
 - `Modonomicon` のための構造を先回りして入れすぎず、必要になった時点で差分を増やす。
@@ -71,6 +100,7 @@ python -m uv run mod-manual build patchouli --mod <modid>
 ## 8. 最低限の確認
 
 - 原稿追加や更新後は `validate` を実行する。
+- 暫定 `en_us` stub で表示確認する間だけ `validate --allow-en-us-stubs` を使い、通常確認では stub 残存をエラーとして扱う。
 - `Patchouli` 向け変更後は `build patchouli` を実行し、`docs/` 配下の出力を確認する。
 - 新しい原稿パターンを導入した場合は、最低 1 件のサンプルを追加する。
 

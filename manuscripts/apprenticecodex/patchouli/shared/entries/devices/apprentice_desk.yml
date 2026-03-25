@@ -1,0 +1,8 @@
+id: apprentice_desk
+name: "見習い用の机"
+category: devices
+icon: apprenticecodex:apprentice_desk
+sortnum: 0
+pages:
+  - type: spotlight
+    source: 00-spotlight.md

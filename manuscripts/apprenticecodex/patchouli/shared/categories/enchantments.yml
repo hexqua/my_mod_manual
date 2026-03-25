@@ -1,0 +1,6 @@
+id: enchantments
+name: "エンチャント"
+description: |
+  汎用的に扱うエンチャントをまとめるカテゴリです。Flask 専用のものは今回の初期スタブから外しています。
+icon: minecraft:enchanted_book
+sortnum: 4

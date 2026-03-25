@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.reflectcast_shield.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:reflectcast_shield",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.reflectcast_shield.page.00_spotlight.title",
+      "item": "apprenticecodex:reflectcast_shield",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.reflectcast_shield.page.00_spotlight.text"
+    }
+  ]
+}

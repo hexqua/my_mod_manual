@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.spellstained_runic_tablet.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:spellstained_runic_tablet",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.spellstained_runic_tablet.page.00_spotlight.title",
+      "item": "apprenticecodex:spellstained_runic_tablet",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.spellstained_runic_tablet.page.00_spotlight.text"
+    }
+  ]
+}

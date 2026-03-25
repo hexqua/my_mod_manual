@@ -1,0 +1,19 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.spellgun_system.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:iron_spellcaster_gun",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.spellgun_system.page.00_spotlight.title",
+      "item": "apprenticecodex:iron_spellcaster_gun",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.spellgun_system.page.00_spotlight.text"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.spellgun_system.page.01_coverage.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.spellgun_system.page.01_coverage.text"
+    }
+  ]
+}

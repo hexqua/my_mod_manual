@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.spellcaster_ammo_pouch.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:spellcaster_ammo_pouch",
+  "sortnum": 7,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.spellcaster_ammo_pouch.page.00_spotlight.title",
+      "item": "apprenticecodex:spellcaster_ammo_pouch",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.spellcaster_ammo_pouch.page.00_spotlight.text"
+    }
+  ]
+}

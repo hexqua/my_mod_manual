@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.spellstained_arcane_ingot.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:spellstained_arcane_ingot",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.spellstained_arcane_ingot.page.00_spotlight.title",
+      "item": "apprenticecodex:spellstained_arcane_ingot",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.spellstained_arcane_ingot.page.00_spotlight.text"
+    }
+  ]
+}

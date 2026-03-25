@@ -1,0 +1,12 @@
+book_id: apprentice_codex
+book_namespace: apprenticecodex
+source_locale: ja_jp
+name: "Apprentice's Codex"
+landing_text: "Apprentice's Codex は Iron's Spells 'n Spellbooks の要素を追加するアドオンである。$(br)この手書きメモはこの魔術を開発した見習い魔術師が、後から学ぶ別の見習い向けに残した資料である。"
+subtitle: "testtest"
+version: "0"
+use_resource_pack: true
+model: patchouli:book_brown
+locales:
+  - en_us
+  - ja_jp

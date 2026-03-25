@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.spellcasters_flask.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:spellcasters_flask",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.spellcasters_flask.page.00_spotlight.title",
+      "item": "apprenticecodex:spellcasters_flask",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.spellcasters_flask.page.00_spotlight.text"
+    }
+  ]
+}

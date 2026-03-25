@@ -1,0 +1,10 @@
+id: stealth_rune_set
+name: "隠形ルーン装備"
+category: equipment_and_accessories
+icon: apprenticecodex:stealth_rune_armor_body
+sortnum: 2
+pages:
+  - type: spotlight
+    source: 00-spotlight.md
+  - type: text
+    source: 01-coverage.md

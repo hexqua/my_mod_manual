@@ -1,0 +1,6 @@
+id: equipment_and_accessories
+name: "防具・装飾具"
+description: |
+  防具と Curios 系装備をまとめるカテゴリです。Spellbook 系もここで扱います。
+icon: apprenticecodex:apprentice_mage_torso
+sortnum: 3

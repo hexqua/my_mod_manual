@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.name",
+  "category": "apprenticecodex:equipment_and_accessories",
+  "icon": "apprenticecodex:explorers_codex",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.title",
+      "item": "apprenticecodex:explorers_codex",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.text"
+    }
+  ]
+}

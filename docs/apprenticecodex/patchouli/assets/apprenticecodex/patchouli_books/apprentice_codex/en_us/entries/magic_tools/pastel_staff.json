@@ -1,0 +1,14 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.pastel_staff.name",
+  "category": "apprenticecodex:magic_tools",
+  "icon": "apprenticecodex:pastel_staff",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.pastel_staff.page.00_spotlight.title",
+      "item": "apprenticecodex:pastel_staff",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.pastel_staff.page.00_spotlight.text"
+    }
+  ]
+}

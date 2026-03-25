@@ -1,0 +1,29 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.name",
+  "category": "apprenticecodex:apprentice_guide",
+  "icon": "minecraft:book",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.00_overview.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.00_overview.text"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.01_prepare.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.01_prepare.text"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.02_craft.title",
+      "recipe": "apprenticecodex:explorers_codex",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.02_craft.text"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.03_usage.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.03_usage.text"
+    }
+  ]
+}

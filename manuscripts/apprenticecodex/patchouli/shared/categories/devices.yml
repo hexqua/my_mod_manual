@@ -1,0 +1,6 @@
+id: devices
+name: "装置"
+description: |
+  現在実装されているブロック系要素の置き場です。各項目の本文は後で整理する前提のスタブです。
+icon: apprenticecodex:apprentice_desk
+sortnum: 1
