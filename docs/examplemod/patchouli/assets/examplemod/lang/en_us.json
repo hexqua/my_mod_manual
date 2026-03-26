@@ -1,11 +1,11 @@
 {
   "patchouli.examplemod.examplemod.name": "Example Mod Manual",
-  "patchouli.examplemod.examplemod.landing_text": "Welcome to the example manual.\n",
+  "patchouli.examplemod.examplemod.landing_text": "Welcome to the example manual.",
   "patchouli.examplemod.examplemod.category.getting_started.name": "Getting Started",
-  "patchouli.examplemod.examplemod.category.getting_started.description": "Learn the initial workflow for this mod.\n",
+  "patchouli.examplemod.examplemod.category.getting_started.description": "Learn the initial workflow for this mod.",
   "patchouli.examplemod.examplemod.entry.first_steps.name": "First Steps",
   "patchouli.examplemod.examplemod.entry.first_steps.page.00_introduction.title": "Welcome",
-  "patchouli.examplemod.examplemod.entry.first_steps.page.00_introduction.text": "This repository keeps Patchouli manuscript sources under `manuscripts/`.\n\nEdit the YAML and Markdown there, then regenerate JSON into `docs/`.",
+  "patchouli.examplemod.examplemod.entry.first_steps.page.00_introduction.text": "This repository keeps Patchouli manuscript sources under `manuscripts/`. Edit the YAML and Markdown there, then regenerate JSON into `docs/`.",
   "patchouli.examplemod.examplemod.entry.first_steps.page.01_next_steps.title": "Next Steps",
-  "patchouli.examplemod.examplemod.entry.first_steps.page.01_next_steps.text": "Run `python -m uv run mod-manual validate` before building.\n\nWhen the output looks correct, copy the generated JSON into the target MOD repository by hand."
+  "patchouli.examplemod.examplemod.entry.first_steps.page.01_next_steps.text": "Run `python -m uv run mod-manual validate` before building. When the output looks correct, copy the generated JSON into the target MOD repository by hand."
 }

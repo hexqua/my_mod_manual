@@ -5,7 +5,7 @@ import re
 import shutil
 import tomllib
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import yaml
 
@@ -18,6 +18,7 @@ TRANSLATION_KEY_PATTERN = re.compile(r"^[a-z0-9_.-]+$")
 NON_SLUG_CHARS_PATTERN = re.compile(r"[^a-z0-9]+")
 BOOK_TRANSLATABLE_FIELDS = ("name", "landing_text", "subtitle")
 CATEGORY_TRANSLATABLE_FIELDS = ("name", "description")
+CATEGORY_DESCRIPTION_BREAKS_FIELD = "description_breaks"
 ENTRY_TRANSLATABLE_FIELDS = ("name",)
 PAGE_TRANSLATABLE_FIELDS = ("title", "text")
 TRANSLATION_STATUS_FIELD = "translation_status"
@@ -190,8 +191,13 @@ def build_patchouli_locale_outputs(
     entry_payloads: dict[Path, dict[str, Any]] = {}
 
     for category_id in sorted(shared_categories):
-        _, shared_category = shared_categories[category_id]
-        category = merge_patchouli_document(shared_category, category_overrides.get(category_id))
+        category_path, shared_category = shared_categories[category_id]
+        category_override = category_overrides.get(category_id)
+        category = merge_patchouli_document(shared_category, category_override)
+        description_breaks = pop_patchouli_category_description_breaks(
+            category,
+            category_override[0] if category_override is not None else category_path,
+        )
         payload = dict(category)
         payload.pop("id", None)
         localize_mapping_field(
@@ -205,6 +211,7 @@ def build_patchouli_locale_outputs(
             "description",
             build_translation_key(namespace, book_id, "category", category_id, "description"),
             lang_entries,
+            transform=normalize_patchouli_description_text if description_breaks else normalize_patchouli_lang_text,
         )
         category_payloads[category_id] = payload
 
@@ -356,6 +363,7 @@ def scaffold_category(root: Path, modid: str, category_id: str, name: str, local
         lines = [
             f"id: {category_id}",
             f'name: "{name}"',
+            f"{CATEGORY_DESCRIPTION_BREAKS_FIELD}: true",
             "description: |",
             f"  Overview for {name}.",
             "icon: minecraft:book",
@@ -367,6 +375,7 @@ def scaffold_category(root: Path, modid: str, category_id: str, name: str, local
         lines = [
             f"id: {category_id}",
             f'name: "{name}"',
+            f"{CATEGORY_DESCRIPTION_BREAKS_FIELD}: true",
             "description: |",
             f"  Localized overview for {name}.",
             "",
@@ -550,6 +559,17 @@ def validate_patchouli(root: Path, mod: ModSpec, allow_en_us_stubs: bool = False
         for category_id, override in category_overrides.items():
             if category_id not in shared_categories:
                 errors.append(f"{override[0]}: category '{category_id}' is not defined in shared")
+
+        for category_id, (shared_path, shared_category) in shared_categories.items():
+            category_override = category_overrides.get(category_id)
+            category = merge_patchouli_document(shared_category, category_override)
+            try:
+                pop_patchouli_category_description_breaks(
+                    category,
+                    category_override[0] if category_override is not None else shared_path,
+                )
+            except ManualError as exc:
+                errors.append(str(exc))
 
     return errors
 
@@ -924,14 +944,20 @@ def is_translation_stub(frontmatter: dict[str, Any]) -> bool:
     return frontmatter.get(TRANSLATION_STATUS_FIELD) == TRANSLATION_STUB_VALUE
 
 
-def localize_mapping_field(payload: dict[str, Any], field: str, key: str, lang_entries: dict[str, str]) -> None:
+def localize_mapping_field(
+    payload: dict[str, Any],
+    field: str,
+    key: str,
+    lang_entries: dict[str, str],
+    transform: Callable[[str], str] | None = None,
+) -> None:
     value = payload.get(field)
     if not isinstance(value, str) or not value:
         return
     if looks_like_translation_key(value):
         return
     payload[field] = key
-    lang_entries[key] = normalize_patchouli_lang_text(value)
+    lang_entries[key] = (transform or normalize_patchouli_lang_text)(value)
 
 
 def resolve_book_lang_entries(
@@ -1036,6 +1062,35 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
 
 def normalize_patchouli_lang_text(value: str) -> str:
     return re.sub(r"[ \t]*[\r\n]+[ \t]*", " ", value).strip()
+
+
+def normalize_patchouli_description_text(value: str) -> str:
+    text = value.replace("\r\n", "\n").replace("\r", "\n").strip()
+    if not text:
+        return ""
+
+    pieces: list[str] = []
+    pending_break = False
+    for raw_line in text.split("\n"):
+        line = raw_line.strip()
+        if not line:
+            if pieces:
+                pending_break = True
+            continue
+
+        if pieces:
+            pieces.append("$(br2)" if pending_break else "$(br)")
+        pieces.append(line)
+        pending_break = False
+
+    return "".join(pieces)
+
+
+def pop_patchouli_category_description_breaks(category: dict[str, Any], category_path: Path) -> bool:
+    raw_value = category.pop(CATEGORY_DESCRIPTION_BREAKS_FIELD, True)
+    if isinstance(raw_value, bool):
+        return raw_value
+    raise ManualError(f"{category_path}: {CATEGORY_DESCRIPTION_BREAKS_FIELD} must be a boolean")
 
 
 def require_slug(value: Any, label: str) -> str:

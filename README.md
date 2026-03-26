@@ -95,4 +95,10 @@ title: Welcome
 この本文は現在そのまま Patchouli の `text` に入ります。
 ```
 
+`description` は YAML で複数行にすると、生成時に Patchouli の改行マクロへ変換されます。
+デフォルトでは有効で、カテゴリ YAML に `description_breaks: false` を書くとこの変換を止められます。
+
+- 1 行の改行は `$(br)` に変換されます。
+- 空行を含む 2 行以上の連続改行は `$(br2)` にまとめられます。
+
 `Patchouli` 向けの本文は、当面 CommonMark 変換をせず、そのまま Patchouli テキストとして扱います。
