@@ -1,6 +1,6 @@
 ---
-title: "Amulet of Absorption Amplify"
-item: apprenticecodex:absorption_amplify_amulet
+translation_status: stub
+title: 'TODO: Translate - 衝撃吸収増強のネックレス'
 ---
 
-TODO: Stub text. The core effect, use cases, and caveats will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

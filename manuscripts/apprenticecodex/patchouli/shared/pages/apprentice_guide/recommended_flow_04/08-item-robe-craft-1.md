@@ -1,0 +1,4 @@
+---
+recipe: apprenticecodex:apprentice_mage_scarf
+recipe2: apprenticecodex:apprentice_mage_robe
+---

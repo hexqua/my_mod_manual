@@ -1,0 +1,63 @@
+{
+  "name": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.name",
+  "category": "apprenticecodex:apprentice_guide",
+  "icon": "apprenticecodex:apprentice_mage_scarf",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.00_overview.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.00_overview.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.01_overview_2.text"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "apprenticecodex:arcanum_in_a_jar",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.02_item_jar.text"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "apprenticecodex:arcanum_in_a_jar",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.03_item_jar_craft.text"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "apprenticecodex:apprentice_desk",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.04_item_desk.text"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "apprenticecodex:apprentice_desk",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.05_item_desk_craft.text"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.06_item_robe.title",
+      "item": "apprenticecodex:apprentice_mage_scarf",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.06_item_robe.text"
+    },
+    {
+      "type": "patchouli:entity",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.07_item_robe_view.title",
+      "entity": "minecraft:armor_stand{ArmorItems:[{id:\"apprenticecodex:apprentice_mage_boots\",Count:1b},{id:\"apprenticecodex:apprentice_mage_leggings\",Count:1b},{id:\"apprenticecodex:apprentice_mage_torso\",Count:1b},{id:\"apprenticecodex:apprentice_mage_scarf\",Count:1b}],NoBasePlate:1b,ShowArms:1b}",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.07_item_robe_view.text"
+    },
+    {
+      "type": "patchouli:smithing",
+      "recipe": "apprenticecodex:apprentice_mage_scarf",
+      "recipe2": "apprenticecodex:apprentice_mage_robe"
+    },
+    {
+      "type": "patchouli:smithing",
+      "recipe": "apprenticecodex:apprentice_mage_leggings",
+      "recipe2": "apprenticecodex:apprentice_mage_boots"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_04.page.10_final.text"
+    }
+  ]
+}

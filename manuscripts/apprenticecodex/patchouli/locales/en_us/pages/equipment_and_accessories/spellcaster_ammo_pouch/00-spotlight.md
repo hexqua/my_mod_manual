@@ -1,6 +1,6 @@
 ---
-title: "Spellcaster Ammo Pouch"
-item: apprenticecodex:spellcaster_ammo_pouch
+translation_status: stub
+title: 'TODO: Translate - 詠唱者の弾薬ポーチ'
 ---
 
-TODO: Stub text. The core effect, use cases, and caveats will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

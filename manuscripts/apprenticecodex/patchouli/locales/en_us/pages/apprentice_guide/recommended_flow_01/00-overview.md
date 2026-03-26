@@ -1,5 +1,6 @@
 ---
-title: "Recommended Route 1"
+translation_status: stub
+title: 'TODO: Translate - 世界に降り立って'
 ---
 
-TODO: Stub text. This page will later describe an early apprentice-friendly route and the first goals to aim for.
+TODO: This page is not translated yet. Source locale: ja_jp.

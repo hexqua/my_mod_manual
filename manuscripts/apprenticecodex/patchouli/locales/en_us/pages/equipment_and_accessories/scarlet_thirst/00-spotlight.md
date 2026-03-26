@@ -1,6 +1,6 @@
 ---
-title: "Scarlet Thirst"
-item: apprenticecodex:scarlet_thirst
+translation_status: stub
+title: 'TODO: Translate - 真紅の渇望'
 ---
 
-TODO: Stub text. The core effect, use cases, and caveats will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

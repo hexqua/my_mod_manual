@@ -1,6 +1,6 @@
 ---
-title: "Explorer's Cane"
-item: apprenticecodex:explorers_cane
+translation_status: stub
+title: 'TODO: Translate - 探索者のステッキ'
 ---
 
-TODO: Stub text. Its role, gear synergy, and recommended timing will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

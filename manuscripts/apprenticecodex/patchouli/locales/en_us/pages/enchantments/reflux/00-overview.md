@@ -1,5 +1,6 @@
 ---
-title: "Reflux"
+translation_status: stub
+title: 'TODO: Translate - 還流'
 ---
 
-TODO: Stub text. The core use case, valid targets, and practical differences for this enchantment will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

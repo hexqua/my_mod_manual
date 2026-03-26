@@ -1,6 +1,6 @@
 ---
-title: "Spellcaster's Flask"
-item: apprenticecodex:spellcasters_flask
+translation_status: stub
+title: 'TODO: Translate - 魔術詠唱者のフラスコ'
 ---
 
-TODO: Stub text. Its role, gear synergy, and recommended timing will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

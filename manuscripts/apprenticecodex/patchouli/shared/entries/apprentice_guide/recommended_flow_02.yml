@@ -1,8 +1,16 @@
 id: recommended_flow_02
-name: "見習いの装備を身につけるまで"
+name: "最初の魔法を使うまで"
 category: apprentice_guide
-icon: minecraft:book
+icon: apprenticecodex:explorers_codex
 sortnum: 1
 pages:
   - type: text
     source: 00-overview.md
+  - type: crafting
+    source: 01-step1-craft.md
+  - type: text
+    source: 02-step2.md
+  - type: crafting
+    source: 03-step3-craft.md
+  - type: text
+    source: 04-step4.md

@@ -1,6 +1,6 @@
 ---
-title: "Crystal Bladed Staff"
-item: apprenticecodex:crystal_bladed_staff
+translation_status: stub
+title: 'TODO: Translate - 刃の結晶杖'
 ---
 
-TODO: Stub text. Its role, gear synergy, and recommended timing will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

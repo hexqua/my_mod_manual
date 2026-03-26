@@ -1,6 +1,6 @@
 ---
-title: "Ender Grimoire"
-item: apprenticecodex:ender_grimoire
+translation_status: stub
+title: 'TODO: Translate - エンダーグリモア'
 ---
 
-TODO: Stub text. The core effect, use cases, and caveats will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

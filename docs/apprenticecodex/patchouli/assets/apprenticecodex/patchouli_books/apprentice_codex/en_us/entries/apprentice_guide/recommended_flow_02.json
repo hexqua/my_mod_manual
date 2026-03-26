@@ -1,13 +1,31 @@
 {
   "name": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_02.name",
   "category": "apprenticecodex:apprentice_guide",
-  "icon": "minecraft:book",
+  "icon": "apprenticecodex:explorers_codex",
   "sortnum": 1,
   "pages": [
     {
       "type": "patchouli:text",
       "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_02.page.00_overview.title",
       "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_02.page.00_overview.text"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irons_spellbooks:copper_spell_book",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_02.page.01_step1_craft.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_02.page.02_step2.text"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "apprenticecodex:explorers_codex",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_02.page.03_step3_craft.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_02.page.04_step4.text"
     }
   ]
 }

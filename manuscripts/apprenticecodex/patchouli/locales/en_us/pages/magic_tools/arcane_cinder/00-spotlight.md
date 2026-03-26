@@ -1,6 +1,6 @@
 ---
-title: "Arcane Cinder"
-item: apprenticecodex:arcane_cinder
+translation_status: stub
+title: 'TODO: Translate - 神秘の燃え殻'
 ---
 
-TODO: Stub text. Acquisition, usage, and material relationships will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

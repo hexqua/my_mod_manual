@@ -1,6 +1,6 @@
 ---
-title: "Spell-stained Arcane Ingot"
-item: apprenticecodex:spellstained_arcane_ingot
+translation_status: stub
+title: 'TODO: Translate - 魔術染めの秘術のインゴット'
 ---
 
-TODO: Stub text. Acquisition, usage, and material relationships will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

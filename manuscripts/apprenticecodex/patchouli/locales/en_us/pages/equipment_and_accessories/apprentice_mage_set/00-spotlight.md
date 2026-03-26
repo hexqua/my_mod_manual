@@ -1,6 +1,6 @@
 ---
-title: "Apprentice Mage Set"
-item: apprenticecodex:apprentice_mage_torso
+translation_status: stub
+title: 'TODO: Translate - 見習い魔術師装備'
 ---
 
-TODO: Stub text. The role of this set, when to assemble it, and its best use cases will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

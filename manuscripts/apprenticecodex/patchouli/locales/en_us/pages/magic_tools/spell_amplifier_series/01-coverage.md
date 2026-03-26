@@ -1,5 +1,6 @@
 ---
-title: "Covered Items"
+translation_status: stub
+title: 'TODO: Translate - 対象仮置き'
 ---
 
-Current scope: Iron Spell Amplifier, Copper Spell Amplifier, and Gold Spell Amplifier.
+TODO: This page is not translated yet. Source locale: ja_jp.

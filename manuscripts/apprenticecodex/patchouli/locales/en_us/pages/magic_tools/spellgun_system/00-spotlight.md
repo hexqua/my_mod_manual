@@ -1,6 +1,6 @@
 ---
-title: "Spellgun Line"
-item: apprenticecodex:iron_spellcaster_gun
+translation_status: stub
+title: 'TODO: Translate - Spellgun 系'
 ---
 
-TODO: Stub text. This section will later summarize the Spellgun variants, their use cases, and the surrounding ammo system.
+TODO: This page is not translated yet. Source locale: ja_jp.

@@ -1,6 +1,6 @@
 ---
-title: "Apprentice Desk"
-item: apprenticecodex:apprentice_desk
+translation_status: stub
+title: 'TODO: Translate - 見習い用の机'
 ---
 
-TODO: Stub text. The role, crafting timing, and main interactions for this device will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

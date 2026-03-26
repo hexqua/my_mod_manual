@@ -1,13 +1,41 @@
 {
   "name": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.name",
   "category": "apprenticecodex:apprentice_guide",
-  "icon": "minecraft:book",
+  "icon": "irons_spellbooks:arcane_essence",
   "sortnum": 2,
   "pages": [
     {
       "type": "patchouli:text",
       "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.page.00_overview.title",
       "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.page.00_overview.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.page.01_step1.text"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.page.02_objective1_necro.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.page.02_objective1_necro.text"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "irons_spellbooks:necromancer",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.page.03_objective1_necro_2.text"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.page.04_objective2_spawner.title",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.page.04_objective2_spawner.text"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:spawner",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.page.05_objective2_spawner_2.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_03.page.06_next.text"
     }
   ]
 }

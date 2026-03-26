@@ -1,6 +1,6 @@
 ---
-title: "Stealth Rune Set"
-item: apprenticecodex:stealth_rune_armor_body
+translation_status: stub
+title: 'TODO: Translate - 隠形ルーン装備'
 ---
 
-TODO: Stub text. The role of this set, when to assemble it, and its best use cases will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

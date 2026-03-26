@@ -1,6 +1,6 @@
 ---
-title: "Pastel Staff"
-item: apprenticecodex:pastel_staff
+translation_status: stub
+title: 'TODO: Translate - パステルスタッフ'
 ---
 
-TODO: Stub text. Its role, gear synergy, and recommended timing will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

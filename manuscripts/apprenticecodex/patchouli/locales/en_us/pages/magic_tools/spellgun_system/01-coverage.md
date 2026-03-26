@@ -1,5 +1,6 @@
 ---
-title: "Covered Items"
+translation_status: stub
+title: 'TODO: Translate - 対象仮置き'
 ---
 
-Current scope: Iron Quickcast Spellgun, Copper Chantcast Spellgun, Gold Heavycast Spellgun, Diamond Grandcast Spellgun, the Rapid/Basic/Arcane/Advanced/Spell Dominator rounds, and their empty casings.
+TODO: This page is not translated yet. Source locale: ja_jp.

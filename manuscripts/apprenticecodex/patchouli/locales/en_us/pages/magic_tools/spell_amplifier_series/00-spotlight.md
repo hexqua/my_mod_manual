@@ -1,6 +1,6 @@
 ---
-title: "Spell Amplifier Line"
-item: apprenticecodex:iron_spell_amplifier
+translation_status: stub
+title: 'TODO: Translate - 魔力増幅装置系'
 ---
 
-TODO: Stub text. This section will later compare the variants and outline offhand usage patterns.
+TODO: This page is not translated yet. Source locale: ja_jp.

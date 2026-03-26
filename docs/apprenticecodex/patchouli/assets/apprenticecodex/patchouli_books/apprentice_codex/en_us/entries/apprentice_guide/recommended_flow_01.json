@@ -1,7 +1,7 @@
 {
   "name": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.name",
   "category": "apprenticecodex:apprentice_guide",
-  "icon": "minecraft:book",
+  "icon": "minecraft:iron_pickaxe",
   "sortnum": 0,
   "pages": [
     {
@@ -11,19 +11,16 @@
     },
     {
       "type": "patchouli:text",
-      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.01_prepare.title",
-      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.01_prepare.text"
-    },
-    {
-      "type": "patchouli:crafting",
-      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.02_craft.title",
-      "recipe": "apprenticecodex:explorers_codex",
-      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.02_craft.text"
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.01_step1.text"
     },
     {
       "type": "patchouli:text",
-      "title": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.03_usage.title",
-      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.03_usage.text"
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.02_step2.text"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:diamond",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.recommended_flow_01.page.03_step3_diamond.text"
     }
   ]
 }

@@ -1,6 +1,6 @@
 ---
-title: "Essence Smoker"
-item: apprenticecodex:essence_smoker
+translation_status: stub
+title: 'TODO: Translate - エッセンス燻製台'
 ---
 
-TODO: Stub text. The role, crafting timing, and main interactions for this device will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

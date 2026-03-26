@@ -1,6 +1,7 @@
 id: apprentice_guide
 name: "見習い向け"
 description: |
-  Iron's Spells 'n Spellbooks はとてもよい魔術体系をしているが、私のような不運な駆け出しが学ぶにはハードルが高い。$(br)そのため本格的にこの魔術に手を出すために役立つ知識をここにまとめた。
+  Iron's Spells 'n Spellbooks はとてもよい魔術体系をしているが、私のような不運な駆け出しが学ぶにはハードルが高い。
+  そのため本格的にこの魔術に手を出すために役立つ知識をここにまとめた。
 icon: minecraft:book
 sortnum: 0

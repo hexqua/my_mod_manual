@@ -1,6 +1,6 @@
 ---
-title: "Protection Spell Supporter"
-item: apprenticecodex:protection_spell_supporter
+translation_status: stub
+title: 'TODO: Translate - 保護術式補助具'
 ---
 
-TODO: Stub text. The core effect, use cases, and caveats will be documented later.
+TODO: This page is not translated yet. Source locale: ja_jp.

@@ -1,5 +1,6 @@
 ---
-title: "Recommended Route 3"
+translation_status: stub
+title: 'TODO: Translate - 魔法を使って次を目指す'
 ---
 
-TODO: Stub text. This page will later collect follow-up goals and optional detours for the next stretch of play.
+TODO: This page is not translated yet. Source locale: ja_jp.
