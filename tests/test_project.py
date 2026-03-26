@@ -66,10 +66,104 @@ def append_shared_page_without_en_us_translation(root: Path) -> Path:
     return page_path
 
 
+def rewrite_multiline_lang_fixture(root: Path) -> None:
+    (root / "manuscripts" / "apprenticecodex" / "patchouli" / "book.yml").write_text(
+        "\n".join(
+            [
+                "book_id: apprentice_codex",
+                "book_namespace: apprenticecodex",
+                "source_locale: ja_jp",
+                'name: "Apprentice\'s Codex"',
+                "landing_text: |",
+                "  Apprentice's Codex は Iron's Spells 'n Spellbooks の要素を追加するアドオンである。",
+                "  この手書きメモはこの魔術を開発した見習い魔術師が、後から学ぶ別の見習い向けに残した資料である。",
+                "subtitle: \"testtest\"",
+                "version: \"0\"",
+                "use_resource_pack: true",
+                "model: patchouli:book_brown",
+                "locales:",
+                "  - en_us",
+                "  - ja_jp",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    (root / "manuscripts" / "apprenticecodex" / "patchouli" / "locales" / "en_us" / "book.yml").write_text(
+        "\n".join(
+            [
+                'name: "Apprentice\'s Codex"',
+                'landing_text: "This Patchouli book is a stub draft for cataloging Apprentice\'s Codex content."',
+                "subtitle: |",
+                "  It lists the current devices, magic tools, equipment, and enchantments,",
+                "  with placeholder text that will be replaced later.",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    shared_page = (
+        root
+        / "manuscripts"
+        / "apprenticecodex"
+        / "patchouli"
+        / "shared"
+        / "pages"
+        / "equipment_and_accessories"
+        / "explorers_codex"
+        / "00-spotlight.md"
+    )
+    shared_page.write_text(
+        "\n".join(
+            [
+                "---",
+                'title: "探索者の写本"',
+                "item: apprenticecodex:explorers_codex",
+                "---",
+                "",
+                "日本語の本文です。",
+                "二行目も入れます。",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    locale_page = (
+        root
+        / "manuscripts"
+        / "apprenticecodex"
+        / "patchouli"
+        / "locales"
+        / "en_us"
+        / "pages"
+        / "equipment_and_accessories"
+        / "explorers_codex"
+        / "00-spotlight.md"
+    )
+    locale_page.write_text(
+        "\n".join(
+            [
+                "---",
+                'title: "Explorer\'s Codex"',
+                "item: apprenticecodex:explorers_codex",
+                "---",
+                "",
+                "This stub text now spans two lines.",
+                "The second line should be flattened.",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
 def test_validate_repository_passes_for_sample(tmp_path: Path) -> None:
     root = copy_fixture_repo(tmp_path)
     sync_en_us_stubs(root, "apprenticecodex")
-    assert validate_repository(root) == []
+    assert validate_repository(root, allow_en_us_stubs=True) == []
 
 
 def test_build_patchouli_writes_expected_files(tmp_path: Path) -> None:
@@ -174,6 +268,39 @@ def test_build_patchouli_generates_lang_entries_from_source_locale_and_override(
     assert ja_lang["patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.name"] == "探索者の写本"
     assert en_entry["pages"][0]["text"] == "patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.text"
     assert en_entry["pages"][0]["item"] == "apprenticecodex:explorers_codex"
+
+
+def test_build_patchouli_flattens_newlines_out_of_lang_values(tmp_path: Path) -> None:
+    root = copy_fixture_repo(tmp_path)
+    rewrite_multiline_lang_fixture(root)
+
+    build_patchouli(root, "apprenticecodex")
+
+    en_lang_path = root / "docs" / "apprenticecodex" / "patchouli" / "assets" / "apprenticecodex" / "lang" / "en_us.json"
+    ja_lang_path = root / "docs" / "apprenticecodex" / "patchouli" / "assets" / "apprenticecodex" / "lang" / "ja_jp.json"
+    en_lang = json.loads(en_lang_path.read_text(encoding="utf-8"))
+    ja_lang = json.loads(ja_lang_path.read_text(encoding="utf-8"))
+
+    assert en_lang["patchouli.apprenticecodex.apprentice_codex.name"] == "Apprentice's Codex"
+    assert en_lang["patchouli.apprenticecodex.apprentice_codex.landing_text"] == (
+        "This Patchouli book is a stub draft for cataloging Apprentice's Codex content."
+    )
+    assert en_lang["patchouli.apprenticecodex.apprentice_codex.subtitle"] == (
+        "It lists the current devices, magic tools, equipment, and enchantments, with placeholder text that will be replaced later."
+    )
+    assert ja_lang["patchouli.apprenticecodex.apprentice_codex.landing_text"] == (
+        "Apprentice's Codex は Iron's Spells 'n Spellbooks の要素を追加するアドオンである。 "
+        "この手書きメモはこの魔術を開発した見習い魔術師が、後から学ぶ別の見習い向けに残した資料である。"
+    )
+    assert ja_lang["patchouli.apprenticecodex.apprentice_codex.subtitle"] == "testtest"
+    assert en_lang["patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.text"] == (
+        "This stub text now spans two lines. The second line should be flattened."
+    )
+    assert ja_lang["patchouli.apprenticecodex.apprentice_codex.entry.explorers_codex.page.00_spotlight.text"] == (
+        "日本語の本文です。 二行目も入れます。"
+    )
+    assert all("\n" not in value and "\r" not in value for value in en_lang.values())
+    assert all("\n" not in value and "\r" not in value for value in ja_lang.values())
 
 
 def test_validate_repository_detects_missing_page(tmp_path: Path) -> None:

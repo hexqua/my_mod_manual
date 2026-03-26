@@ -713,7 +713,7 @@ def normalize_book_payload(
             continue
 
         key = build_book_translation_key(namespace, book_id, field)
-        source_values[field] = value
+        source_values[field] = normalize_patchouli_lang_text(value)
         payload[field] = key
 
     payload["i18n"] = True
@@ -931,7 +931,7 @@ def localize_mapping_field(payload: dict[str, Any], field: str, key: str, lang_e
     if looks_like_translation_key(value):
         return
     payload[field] = key
-    lang_entries[key] = value
+    lang_entries[key] = normalize_patchouli_lang_text(value)
 
 
 def resolve_book_lang_entries(
@@ -952,7 +952,7 @@ def resolve_book_lang_entries(
             raw_value = source_book_values.get(field)
         if raw_value is None:
             continue
-        lang_entries[key] = raw_value
+        lang_entries[key] = normalize_patchouli_lang_text(raw_value)
     return lang_entries
 
 
@@ -1032,6 +1032,10 @@ def write_markdown_document(path: Path, frontmatter: dict[str, Any], body: str) 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def normalize_patchouli_lang_text(value: str) -> str:
+    return re.sub(r"[ \t]*[\r\n]+[ \t]*", " ", value).strip()
 
 
 def require_slug(value: Any, label: str) -> str:
