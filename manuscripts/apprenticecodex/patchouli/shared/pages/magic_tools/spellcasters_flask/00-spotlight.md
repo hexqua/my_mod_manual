@@ -1,5 +1,6 @@
 ---
-title: "魔術詠唱者のフラスコ"
+type: spotlight
+title: 魔術詠唱者のフラスコ
 item: apprenticecodex:spellcasters_flask
 ---
 

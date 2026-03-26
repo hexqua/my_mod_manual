@@ -1,5 +1,6 @@
 ---
-title: "グリモア目録"
+type: spotlight
+title: グリモア目録
 item: apprenticecodex:grimoire_manifest
 ---
 

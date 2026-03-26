@@ -1,5 +1,6 @@
 ---
-title: "魔術染めの秘術のインゴット"
+type: spotlight
+title: 魔術染めの秘術のインゴット
 item: apprenticecodex:spellstained_arcane_ingot
 ---
 

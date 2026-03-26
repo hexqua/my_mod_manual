@@ -1,8 +1,7 @@
 id: crystal_bladed_staff
-name: "刃の結晶杖"
+name: 刃の結晶杖
 category: magic_tools
 icon: apprenticecodex:crystal_bladed_staff
 sortnum: 9
 pages:
-  - type: spotlight
-    source: 00-spotlight.md
+  - source: 00-spotlight.md

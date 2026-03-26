@@ -1,8 +1,7 @@
 id: tense
-name: "時制"
+name: 時制
 category: enchantments
 icon: minecraft:enchanted_book
 sortnum: 3
 pages:
-  - type: text
-    source: 00-overview.md
+  - source: 00-overview.md

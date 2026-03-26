@@ -1,5 +1,6 @@
 ---
-title: "Next Steps"
+type: text
+title: Next Steps
 ---
 
 Run `python -m uv run mod-manual validate` before building.

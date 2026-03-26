@@ -1,10 +1,8 @@
 id: apprentice_mage_set
-name: "見習い魔術師装備"
+name: 見習い魔術師装備
 category: equipment_and_accessories
 icon: apprenticecodex:apprentice_mage_torso
 sortnum: 0
 pages:
-  - type: spotlight
-    source: 00-spotlight.md
-  - type: text
-    source: 01-coverage.md
+  - source: 00-spotlight.md
+  - source: 01-coverage.md

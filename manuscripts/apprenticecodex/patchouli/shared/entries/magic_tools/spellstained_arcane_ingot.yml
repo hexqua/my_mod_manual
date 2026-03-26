@@ -1,8 +1,7 @@
 id: spellstained_arcane_ingot
-name: "魔術染めの秘術のインゴット"
+name: 魔術染めの秘術のインゴット
 category: magic_tools
 icon: apprenticecodex:spellstained_arcane_ingot
 sortnum: 1
 pages:
-  - type: spotlight
-    source: 00-spotlight.md
+  - source: 00-spotlight.md

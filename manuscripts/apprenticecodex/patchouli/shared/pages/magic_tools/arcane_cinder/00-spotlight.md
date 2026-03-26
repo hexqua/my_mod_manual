@@ -1,5 +1,6 @@
 ---
-title: "神秘の燃え殻"
+type: spotlight
+title: 神秘の燃え殻
 item: apprenticecodex:arcane_cinder
 ---
 

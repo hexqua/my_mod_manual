@@ -1,5 +1,6 @@
 ---
-title: "詠唱者の弾薬ポーチ"
+type: spotlight
+title: 詠唱者の弾薬ポーチ
 item: apprenticecodex:spellcaster_ammo_pouch
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: "探索者の写本"
+type: spotlight
+title: 探索者の写本
 item: apprenticecodex:explorers_codex
 ---
 

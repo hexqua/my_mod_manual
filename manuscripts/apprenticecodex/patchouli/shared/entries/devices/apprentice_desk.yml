@@ -1,10 +1,8 @@
 id: apprentice_desk
-name: "見習い用の机"
+name: 見習い用の机
 category: devices
 icon: apprenticecodex:apprentice_desk
 sortnum: 0
 pages:
-  - type: spotlight
-    source: 00-spotlight.md
-  - type: crafting
-    source: 01-crafting.md
+  - source: 00-spotlight.md
+  - source: 01-crafting.md

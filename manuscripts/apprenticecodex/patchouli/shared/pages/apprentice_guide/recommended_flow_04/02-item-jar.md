@@ -1,4 +1,5 @@
 ---
+type: spotlight
 item: apprenticecodex:arcanum_in_a_jar
 ---
 

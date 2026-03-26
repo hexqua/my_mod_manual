@@ -1,10 +1,8 @@
 id: first_steps
-name: "First Steps"
+name: First Steps
 category: getting_started
 icon: minecraft:paper
 sortnum: 0
 pages:
-  - type: text
-    source: 00-introduction.md
-  - type: text
-    source: 01-next-steps.md
+  - source: 00-introduction.md
+  - source: 01-next-steps.md

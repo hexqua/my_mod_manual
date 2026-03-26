@@ -1,5 +1,6 @@
 ---
-title: "Welcome"
+type: text
+title: Welcome
 ---
 
 This repository keeps Patchouli manuscript sources under `manuscripts/`.

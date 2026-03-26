@@ -1,5 +1,6 @@
 ---
-title: "エンダーグリモア"
+type: spotlight
+title: エンダーグリモア
 item: apprenticecodex:ender_grimoire
 ---
 

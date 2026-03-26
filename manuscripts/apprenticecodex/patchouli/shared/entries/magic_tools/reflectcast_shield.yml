@@ -1,8 +1,7 @@
 id: reflectcast_shield
-name: "反射詠唱の盾"
+name: 反射詠唱の盾
 category: magic_tools
 icon: apprenticecodex:reflectcast_shield
 sortnum: 10
 pages:
-  - type: spotlight
-    source: 00-spotlight.md
+  - source: 00-spotlight.md

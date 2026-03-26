@@ -1,14 +1,10 @@
 id: recommended_flow_01
-name: "世界に降り立って"
+name: 世界に降り立って
 category: apprentice_guide
 icon: minecraft:iron_pickaxe
 sortnum: 0
 pages:
-  - type: text
-    source: 00-overview.md
-  - type: text
-    source: 01-step1.md
-  - type: text
-    source: 02-step2.md
-  - type: spotlight
-    source: 03-step3-diamond.md
+  - source: 00-overview.md
+  - source: 01-step1.md
+  - source: 02-step2.md
+  - source: 03-step3-diamond.md

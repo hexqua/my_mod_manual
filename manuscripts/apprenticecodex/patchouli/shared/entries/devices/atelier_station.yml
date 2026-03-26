@@ -1,12 +1,9 @@
 id: atelier_station
-name: "アトリエステーション"
+name: アトリエステーション
 category: devices
 icon: apprenticecodex:atelier_station
 sortnum: 4
 pages:
-  - type: spotlight
-    source: 00-spotlight.md
-  - type: spotlight
-    source: 01-cauldron.md
-  - type: crafting
-    source: 02-crafting.md
+  - source: 00-spotlight.md
+  - source: 01-cauldron.md
+  - source: 02-crafting.md

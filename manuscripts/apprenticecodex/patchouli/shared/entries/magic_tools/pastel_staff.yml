@@ -1,8 +1,7 @@
 id: pastel_staff
-name: "パステルスタッフ"
+name: パステルスタッフ
 category: magic_tools
 icon: apprenticecodex:pastel_staff
 sortnum: 8
 pages:
-  - type: spotlight
-    source: 00-spotlight.md
+  - source: 00-spotlight.md

@@ -1,5 +1,6 @@
 ---
-title: "保護術式補助具"
+type: spotlight
+title: 保護術式補助具
 item: apprenticecodex:protection_spell_supporter
 ---
 

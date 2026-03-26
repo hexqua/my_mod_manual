@@ -1,4 +1,5 @@
 ---
+type: spotlight
 item: apprenticecodex:essence_smoker
 ---
 

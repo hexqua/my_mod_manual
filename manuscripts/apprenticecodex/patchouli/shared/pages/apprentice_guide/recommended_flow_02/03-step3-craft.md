@@ -1,4 +1,5 @@
 ---
+type: crafting
 recipe: apprenticecodex:explorers_codex
 ---
 

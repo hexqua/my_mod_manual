@@ -1,8 +1,7 @@
 id: plunder
-name: "略奪"
+name: 略奪
 category: enchantments
 icon: minecraft:enchanted_book
 sortnum: 8
 pages:
-  - type: text
-    source: 00-overview.md
+  - source: 00-overview.md

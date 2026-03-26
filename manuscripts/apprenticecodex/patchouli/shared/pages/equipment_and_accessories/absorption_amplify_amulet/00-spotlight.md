@@ -1,5 +1,6 @@
 ---
-title: "衝撃吸収増強のネックレス"
+type: spotlight
+title: 衝撃吸収増強のネックレス
 item: apprenticecodex:absorption_amplify_amulet
 ---
 

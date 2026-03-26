@@ -1,8 +1,7 @@
 id: transcendence
-name: "超越"
+name: 超越
 category: enchantments
 icon: minecraft:enchanted_book
 sortnum: 6
 pages:
-  - type: text
-    source: 00-overview.md
+  - source: 00-overview.md

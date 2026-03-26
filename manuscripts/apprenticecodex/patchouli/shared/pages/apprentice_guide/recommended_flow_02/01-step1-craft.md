@@ -1,4 +1,5 @@
 ---
+type: crafting
 recipe: irons_spellbooks:copper_spell_book
 ---
 

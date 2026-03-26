@@ -1,5 +1,6 @@
 ---
-title: "職人の歓喜"
+type: spotlight
+title: 職人の歓喜
 item: apprenticecodex:craftsmans_delight
 ---
 

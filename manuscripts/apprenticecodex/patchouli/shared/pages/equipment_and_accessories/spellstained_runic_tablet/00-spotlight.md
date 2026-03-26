@@ -1,5 +1,6 @@
 ---
-title: "魔術染めのルーンタブレット"
+type: spotlight
+title: 魔術染めのルーンタブレット
 item: apprenticecodex:spellstained_runic_tablet
 ---
 

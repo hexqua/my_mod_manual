@@ -1,28 +1,17 @@
 id: recommended_flow_04
-name: "一端の見習いを目指して"
+name: 一端の見習いを目指して
 category: apprentice_guide
 icon: apprenticecodex:apprentice_mage_scarf
 sortnum: 3
 pages:
-  - type: text
-    source: 00-overview.md
-  - type: text
-    source: 01-overview-2.md
-  - type: spotlight
-    source: 02-item-jar.md
-  - type: crafting
-    source: 03-item-jar-craft.md
-  - type: spotlight
-    source: 04-item-desk.md
-  - type: crafting
-    source: 05-item-desk-craft.md
-  - type: spotlight
-    source: 06-item-robe.md
-  - type: entity
-    source: 07-item-robe-view.md
-  - type: smithing
-    source: 08-item-robe-craft-1.md
-  - type: smithing
-    source: 09-item-robe-craft-2.md
-  - type: text
-    source: 10-final.md
+  - source: 00-overview.md
+  - source: 01-overview-2.md
+  - source: 02-item-jar.md
+  - source: 03-item-jar-craft.md
+  - source: 04-item-desk.md
+  - source: 05-item-desk-craft.md
+  - source: 06-item-robe.md
+  - source: 07-item-robe-view.md
+  - source: 08-item-robe-craft-1.md
+  - source: 09-item-robe-craft-2.md
+  - source: 10-final.md

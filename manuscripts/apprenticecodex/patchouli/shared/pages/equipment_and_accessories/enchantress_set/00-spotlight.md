@@ -1,5 +1,6 @@
 ---
-title: "付呪魔女装備"
+type: spotlight
+title: 付呪魔女装備
 item: apprenticecodex:enchantress_robe
 ---
 

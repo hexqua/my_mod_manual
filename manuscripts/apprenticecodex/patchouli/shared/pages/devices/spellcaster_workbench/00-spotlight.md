@@ -1,4 +1,5 @@
 ---
+type: spotlight
 item: apprenticecodex:spellcaster_workbench
 ---
 

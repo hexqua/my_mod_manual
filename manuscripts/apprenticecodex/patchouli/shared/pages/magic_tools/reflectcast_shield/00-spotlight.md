@@ -1,5 +1,6 @@
 ---
-title: "反射詠唱の盾"
+type: spotlight
+title: 反射詠唱の盾
 item: apprenticecodex:reflectcast_shield
 ---
 

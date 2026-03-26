@@ -1,4 +1,5 @@
 ---
+type: crafting
 recipe: apprenticecodex:apprentice_desk
 ---
 

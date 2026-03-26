@@ -1,8 +1,7 @@
 id: attunement
-name: "同調"
+name: 同調
 category: enchantments
 icon: minecraft:enchanted_book
 sortnum: 5
 pages:
-  - type: text
-    source: 00-overview.md
+  - source: 00-overview.md

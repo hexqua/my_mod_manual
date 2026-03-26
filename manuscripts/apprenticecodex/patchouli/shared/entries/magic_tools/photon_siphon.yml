@@ -1,8 +1,7 @@
 id: photon_siphon
-name: "フォトンサイフォン"
+name: フォトンサイフォン
 category: magic_tools
 icon: apprenticecodex:photon_siphon
 sortnum: 4
 pages:
-  - type: spotlight
-    source: 00-spotlight.md
+  - source: 00-spotlight.md

@@ -1,5 +1,6 @@
 ---
-title: "パステルスタッフ"
+type: spotlight
+title: パステルスタッフ
 item: apprenticecodex:pastel_staff
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: "魔力増幅装置系"
+type: spotlight
+title: 魔力増幅装置系
 item: apprenticecodex:iron_spell_amplifier
 ---
 

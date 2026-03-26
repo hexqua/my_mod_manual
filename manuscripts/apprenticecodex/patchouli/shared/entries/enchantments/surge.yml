@@ -1,8 +1,7 @@
 id: surge
-name: "増幅"
+name: 増幅
 category: enchantments
 icon: minecraft:enchanted_book
 sortnum: 4
 pages:
-  - type: text
-    source: 00-overview.md
+  - source: 00-overview.md

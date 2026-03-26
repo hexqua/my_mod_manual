@@ -62,6 +62,8 @@
   "patchouli.apprenticecodex.apprentice_codex.entry.essence_smoker.name": "エッセンス燻製台",
   "patchouli.apprenticecodex.apprentice_codex.entry.essence_smoker.page.00_spotlight.text": "触媒をエッセンスの力を借りて燃焼させることで特殊な加工が行える。$(br) 触媒一つにつき最大八つまで同時に加工を行うことができる。$(br) 着火には$(item)火打石と打ち金$()か$(thing)ファイアボルト$()が必要。",
   "patchouli.apprenticecodex.apprentice_codex.entry.essence_smoker.page.01_crafting.text": "この装置で加工できる代表的なレシピは次ページ以降を参照。",
+  "patchouli.apprenticecodex.apprentice_codex.entry.essence_smoker.page.02_purification_examples.text": "左から順に $(thing)触媒$()、$(item)加工対象$()、$(thing)生成物$() を示す。$(br) まずは浄化や汚染のように、素材の性質を変える加工を覚えると使いどころが掴みやすい。",
+  "patchouli.apprenticecodex.apprentice_codex.entry.essence_smoker.page.03_infusion_examples.text": "エッセンスの燻製台である以上、エッセンスの魔力を炭に移す事も造作ない。$(br) やや高価なエッセンスを使うが、かまどや溶鉱炉の動作を加速させることができる。",
   "patchouli.apprenticecodex.apprentice_codex.entry.spellcaster_workbench.name": "魔術師の作業台",
   "patchouli.apprenticecodex.apprentice_codex.entry.spellcaster_workbench.page.00_spotlight.text": "$(l:magic_tool/spellgun_system)詠唱銃$(/l)で使う弾の作成に使う。$(br) また、$(item)詠唱銃$()に注入した魔法のスクロールを取り外したり、 $(l:magic_tool/spellcasters_flask)魔術詠唱者のフラスコ$(/l)の調整を行う用途にも使える。",
   "patchouli.apprenticecodex.apprentice_codex.entry.spellcaster_workbench.page.01_crafting.text": "没入型魔術になりきれるかな？",

@@ -1,5 +1,6 @@
 ---
-title: "見習い魔術師のローブ一式"
+type: spotlight
+title: 見習い魔術師のローブ一式
 item: apprenticecodex:apprentice_mage_scarf
 ---
 

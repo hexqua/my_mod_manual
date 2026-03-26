@@ -7,13 +7,25 @@
     {
       "type": "patchouli:spotlight",
       "item": "apprenticecodex:essence_smoker",
-      "title": "patchouli.apprenticecodex.apprentice_codex.entry.essence_smoker.page.00_spotlight.title",
       "text": "patchouli.apprenticecodex.apprentice_codex.entry.essence_smoker.page.00_spotlight.text"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "apprenticecodex:essence_smoker",
       "text": "patchouli.apprenticecodex.apprentice_codex.entry.essence_smoker.page.01_crafting.text"
+    },
+    {
+      "type": "apprenticecodex:essence_smoker_recipe",
+      "recipe2": "apprenticecodex:essence_smoker/purify_rotten_flesh_to_leather",
+      "recipe": "apprenticecodex:essence_smoker/taint_potato",
+      "recipe3": "apprenticecodex:essence_smoker/blaze_bonemeal_to_gunpowder",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.essence_smoker.page.02_purification_examples.text"
+    },
+    {
+      "type": "apprenticecodex:essence_smoker_recipe",
+      "recipe": "apprenticecodex:essence_smoker/infuse_coal_to_arcane_cinder",
+      "recipe2": "apprenticecodex:essence_smoker/infuse_charcoal_to_arcane_cinder",
+      "text": "patchouli.apprenticecodex.apprentice_codex.entry.essence_smoker.page.03_infusion_examples.text"
     }
   ]
 }

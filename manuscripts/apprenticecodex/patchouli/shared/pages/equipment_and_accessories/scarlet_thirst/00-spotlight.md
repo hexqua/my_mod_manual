@@ -1,5 +1,6 @@
 ---
-title: "真紅の渇望"
+type: spotlight
+title: 真紅の渇望
 item: apprenticecodex:scarlet_thirst
 ---
 

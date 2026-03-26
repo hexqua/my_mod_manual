@@ -1,5 +1,6 @@
 ---
-title: "刃の結晶杖"
+type: spotlight
+title: 刃の結晶杖
 item: apprenticecodex:crystal_bladed_staff
 ---
 

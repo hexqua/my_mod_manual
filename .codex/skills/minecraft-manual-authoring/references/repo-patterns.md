@@ -65,14 +65,14 @@ category: getting_started
 icon: minecraft:paper
 sortnum: 0
 pages:
-  - type: text
-    source: 00-introduction.md
+  - source: 00-introduction.md
 ```
 
 ### `shared/pages/<entry_id>/00-introduction.md`
 
 ```md
 ---
+type: text
 title: "Welcome"
 ---
 Write Patchouli text here.

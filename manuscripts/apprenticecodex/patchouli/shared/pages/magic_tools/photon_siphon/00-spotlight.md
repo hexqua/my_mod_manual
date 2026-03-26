@@ -1,5 +1,6 @@
 ---
-title: "フォトンサイフォン"
+type: spotlight
+title: フォトンサイフォン
 item: apprenticecodex:photon_siphon
 ---
 

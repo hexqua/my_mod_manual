@@ -1,5 +1,6 @@
 ---
-title: "Spellgun 系"
+type: spotlight
+title: Spellgun 系
 item: apprenticecodex:iron_spellcaster_gun
 ---
 

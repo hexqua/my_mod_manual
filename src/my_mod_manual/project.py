@@ -405,8 +405,7 @@ def scaffold_entry(
             "icon: minecraft:paper",
             "sortnum: 0",
             "pages:",
-            "  - type: text",
-            "    source: 00-introduction.md",
+            "  - source: 00-introduction.md",
             "",
         ]
     else:
@@ -429,6 +428,7 @@ def scaffold_entry(
         "\n".join(
             [
                 "---",
+                "type: text",
                 f'title: "{name}"',
                 "---",
                 "",
@@ -587,7 +587,8 @@ def validate_entry_document(entry_path: Path, entry: dict[str, Any], category_id
         if not isinstance(raw_page, dict):
             raise ManualError(f"{entry_path}: pages[{page_index}] must be a mapping")
         page_type = str(raw_page.get("type") or "")
-        if not page_type:
+        source_name = raw_page.get("source")
+        if not page_type and not source_name:
             raise ManualError(f"{entry_path}: pages[{page_index}] is missing type")
 
 
@@ -604,9 +605,23 @@ def validate_entry_pages(
     category_id = require_slug(entry.get("category"), f"{entry_path}: category")
     page_dir = page_dir_for_entry(category_id, entry_id)
     seen_sources: set[str] = set()
+    resolved_source_locale = source_locale or locale
     for raw_page in entry.get("pages", []):
         source_name = raw_page.get("source")
         if not source_name:
+            try:
+                resolve_page(
+                    entry_path,
+                    raw_page,
+                    root,
+                    modid,
+                    locale,
+                    resolved_source_locale,
+                    category_id,
+                    entry_id,
+                )
+            except ManualError as exc:
+                raise ManualError(str(exc)) from exc
             continue
 
         source_text = str(source_name)
@@ -614,7 +629,6 @@ def validate_entry_pages(
             raise ManualError(f"{entry_path}: duplicated page source '{source_text}'")
         seen_sources.add(source_text)
 
-        resolved_source_locale = source_locale or locale
         if locale == DEFAULT_LOCALE and resolved_source_locale != DEFAULT_LOCALE:
             validate_default_locale_page_source(
                 root,
@@ -625,11 +639,18 @@ def validate_entry_pages(
                 source_text,
                 allow_en_us_stubs,
             )
-            continue
 
-        source_path = resolve_page_source_path(root, modid, locale, resolved_source_locale, page_dir, source_text)
         try:
-            load_markdown_document(source_path)
+            resolve_page(
+                entry_path,
+                raw_page,
+                root,
+                modid,
+                locale,
+                resolved_source_locale,
+                category_id,
+                entry_id,
+            )
         except ManualError as exc:
             raise ManualError(str(exc)) from exc
 

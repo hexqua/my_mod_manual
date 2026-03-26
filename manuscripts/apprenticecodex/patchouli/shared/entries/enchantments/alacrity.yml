@@ -1,8 +1,7 @@
 id: alacrity
-name: "迅速"
+name: 迅速
 category: enchantments
 icon: minecraft:enchanted_book
 sortnum: 2
 pages:
-  - type: text
-    source: 00-overview.md
+  - source: 00-overview.md

@@ -1,5 +1,6 @@
 ---
-title: "隠形ルーン装備"
+type: spotlight
+title: 隠形ルーン装備
 item: apprenticecodex:stealth_rune_armor_body
 ---
 

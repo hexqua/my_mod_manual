@@ -1,5 +1,6 @@
 ---
-title: "探索者のステッキ"
+type: spotlight
+title: 探索者のステッキ
 item: apprenticecodex:explorers_cane
 ---
 

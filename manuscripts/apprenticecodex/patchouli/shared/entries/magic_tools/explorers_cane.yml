@@ -1,8 +1,7 @@
 id: explorers_cane
-name: "探索者のステッキ"
+name: 探索者のステッキ
 category: magic_tools
 icon: apprenticecodex:explorers_cane
 sortnum: 5
 pages:
-  - type: spotlight
-    source: 00-spotlight.md
+  - source: 00-spotlight.md

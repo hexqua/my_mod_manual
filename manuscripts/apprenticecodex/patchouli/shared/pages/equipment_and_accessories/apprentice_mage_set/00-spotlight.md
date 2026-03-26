@@ -1,5 +1,6 @@
 ---
-title: "見習い魔術師装備"
+type: spotlight
+title: 見習い魔術師装備
 item: apprenticecodex:apprentice_mage_torso
 ---
 

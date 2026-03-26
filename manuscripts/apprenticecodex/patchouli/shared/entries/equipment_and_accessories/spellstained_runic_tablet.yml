@@ -1,8 +1,7 @@
 id: spellstained_runic_tablet
-name: "魔術染めのルーンタブレット"
+name: 魔術染めのルーンタブレット
 category: equipment_and_accessories
 icon: apprenticecodex:spellstained_runic_tablet
 sortnum: 10
 pages:
-  - type: spotlight
-    source: 00-spotlight.md
+  - source: 00-spotlight.md
