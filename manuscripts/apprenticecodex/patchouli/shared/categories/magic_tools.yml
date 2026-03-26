@@ -1,6 +1,6 @@
 id: magic_tools
 name: "魔道具"
 description: |
-  通常アイテムとオフハンド運用の魔道具をまとめるカテゴリです。バリエーション違いは必要に応じて 1 entry に集約しています。
-icon: apprenticecodex:pastel_staff
+  魔法を行使したり、それを補助するための魔道具達。
+icon: apprenticecodex:iron_spell_amplifier
 sortnum: 2

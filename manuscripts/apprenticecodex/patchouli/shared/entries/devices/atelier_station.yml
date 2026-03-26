@@ -6,3 +6,7 @@ sortnum: 4
 pages:
   - type: spotlight
     source: 00-spotlight.md
+  - type: spotlight
+    source: 01-cauldron.md
+  - type: crafting
+    source: 02-crafting.md
