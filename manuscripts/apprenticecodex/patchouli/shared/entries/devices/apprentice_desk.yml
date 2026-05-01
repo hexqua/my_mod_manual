@@ -6,3 +6,4 @@ sortnum: 0
 pages:
   - source: 00-spotlight.md
   - source: 01-crafting.md
+  - source: 02-notice.md

@@ -1,0 +1,10 @@
+id: spell_dispenser
+name: スペルディスペンサー
+category: devices
+icon: apprenticecodex:spell_dispenser
+sortnum: 6
+pages:
+  - source: 00-spotlight.md
+  - source: 01-crafting.md
+  - source: 02-usage.md
+  - source: 03-notice.md

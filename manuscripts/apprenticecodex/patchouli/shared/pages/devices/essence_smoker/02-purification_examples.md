@@ -1,7 +1,7 @@
 ---
 type: apprenticecodex:essence_smoker_recipe
-recipe2: apprenticecodex:essence_smoker/purify_rotten_flesh_to_leather
-recipe: apprenticecodex:essence_smoker/taint_potato
+recipe: apprenticecodex:essence_smoker/purify_rotten_flesh_to_leather
+recipe2: apprenticecodex:essence_smoker/taint_potato
 recipe3: apprenticecodex:essence_smoker/blaze_bonemeal_to_gunpowder
 ---
 
