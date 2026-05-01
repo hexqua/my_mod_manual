@@ -5,3 +5,5 @@ icon: apprenticecodex:ender_grimoire
 sortnum: 30
 pages:
   - source: 00-spotlight.md
+  - source: 01-crafting.md
+  - source: 02-usage.md

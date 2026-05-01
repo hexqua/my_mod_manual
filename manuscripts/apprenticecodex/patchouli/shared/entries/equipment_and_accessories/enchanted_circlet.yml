@@ -5,3 +5,4 @@ icon: apprenticecodex:enchanted_circlet
 sortnum: 15
 pages:
   - source: 00-spotlight.md
+  - source: 01-crafting.md

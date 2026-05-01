@@ -5,3 +5,4 @@ icon: apprenticecodex:craftsmans_delight
 sortnum: 11
 pages:
   - source: 00-spotlight.md
+  - source: 01-crafting.md

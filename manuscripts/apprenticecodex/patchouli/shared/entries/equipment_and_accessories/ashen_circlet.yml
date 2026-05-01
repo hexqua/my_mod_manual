@@ -5,3 +5,4 @@ icon: apprenticecodex:ashen_circlet
 sortnum: 14
 pages:
   - source: 00-spotlight.md
+  - source: 01-crafting.md

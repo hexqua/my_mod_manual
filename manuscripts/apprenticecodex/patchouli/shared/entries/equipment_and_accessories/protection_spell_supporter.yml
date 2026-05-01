@@ -5,3 +5,4 @@ icon: apprenticecodex:protection_spell_supporter
 sortnum: 12
 pages:
   - source: 00-spotlight.md
+  - source: 01-crafting.md

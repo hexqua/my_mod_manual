@@ -5,3 +5,8 @@ icon: apprenticecodex:mana_shield_charm
 sortnum: 17
 pages:
   - source: 00-spotlight.md
+  - source: 01-crafting.md
+  - source: 02-enchantment.md
+  - source: 03-shell.md
+  - source: 04-synchronization.md
+  - source: 05-neutralization.md

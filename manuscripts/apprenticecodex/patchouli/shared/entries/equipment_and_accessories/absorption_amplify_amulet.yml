@@ -5,3 +5,4 @@ icon: apprenticecodex:absorption_amplify_amulet
 sortnum: 13
 pages:
   - source: 00-spotlight.md
+  - source: 01-crafting.md

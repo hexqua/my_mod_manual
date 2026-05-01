@@ -1,7 +1,8 @@
 ---
 type: spotlight
-title: 見習い魔術師装備
-item: apprenticecodex:apprentice_mage_torso
+title: 見習い魔術師のローブ
+item: apprenticecodex:apprentice_mage_scarf
 ---
 
-TODO: 本文スタブです。装備の立ち位置、揃える時期、相性の良い運用は後で整理します。
+魔法力を上昇させることができる魔法の防具。$(br)
+防御力はあまり高くないが、全ての魔法を微量ながら強化できる。

@@ -6,3 +6,5 @@ sortnum: 1
 pages:
   - source: 00-spotlight.md
   - source: 01-coverage.md
+  - source: 02-crafting-1.md
+  - source: 03-crafting-2.md
