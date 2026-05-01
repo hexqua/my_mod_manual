@@ -1,0 +1,7 @@
+id: red_energy
+name: レッドエナジー
+category: enchantments
+icon: apprenticecodex:spellcasters_flask
+sortnum: 11
+pages:
+  - source: 00-overview.md

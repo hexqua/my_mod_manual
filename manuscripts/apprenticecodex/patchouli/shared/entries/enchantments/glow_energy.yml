@@ -1,0 +1,7 @@
+id: glow_energy
+name: グロウエナジー
+category: enchantments
+icon: apprenticecodex:spellcasters_flask
+sortnum: 12
+pages:
+  - source: 00-overview.md

@@ -1,0 +1,7 @@
+id: large_mug
+name: 大サイズ
+category: enchantments
+icon: apprenticecodex:spellcasters_flask
+sortnum: 10
+pages:
+  - source: 00-overview.md

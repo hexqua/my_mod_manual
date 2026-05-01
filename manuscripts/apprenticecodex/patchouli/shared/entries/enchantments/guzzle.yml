@@ -1,0 +1,7 @@
+id: guzzle
+name: ガブ飲み
+category: enchantments
+icon: apprenticecodex:spellcasters_flask
+sortnum: 9
+pages:
+  - source: 00-overview.md

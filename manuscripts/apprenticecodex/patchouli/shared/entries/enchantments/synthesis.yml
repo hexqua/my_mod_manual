@@ -1,0 +1,7 @@
+id: synthesis
+name: 合成
+category: enchantments
+icon: minecraft:bow
+sortnum: 13
+pages:
+  - source: 00-overview.md
