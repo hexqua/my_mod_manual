@@ -1,0 +1,7 @@
+id: isekai_travel_guidebook
+name: 異世界旅行ガイドブック
+category: equipment_and_accessories
+icon: apprenticecodex:isekai_travel_guidebook
+sortnum: 33
+pages:
+  - source: 00-spotlight.md

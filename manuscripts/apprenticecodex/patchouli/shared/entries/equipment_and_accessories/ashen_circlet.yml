@@ -1,0 +1,7 @@
+id: ashen_circlet
+name: 灰のサークレット
+category: equipment_and_accessories
+icon: apprenticecodex:ashen_circlet
+sortnum: 14
+pages:
+  - source: 00-spotlight.md

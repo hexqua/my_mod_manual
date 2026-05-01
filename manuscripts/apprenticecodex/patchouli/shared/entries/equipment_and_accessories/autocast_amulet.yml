@@ -1,0 +1,7 @@
+id: autocast_amulet
+name: 自動詠唱のアミュレット
+category: equipment_and_accessories
+icon: apprenticecodex:autocast_amulet
+sortnum: 16
+pages:
+  - source: 00-spotlight.md

@@ -2,6 +2,6 @@ id: explorers_codex
 name: 探索者の写本
 category: equipment_and_accessories
 icon: apprenticecodex:explorers_codex
-sortnum: 9
+sortnum: 31
 pages:
   - source: 00-spotlight.md

@@ -1,0 +1,7 @@
+id: spellcaster_quiver
+name: 詠唱者の矢筒
+category: equipment_and_accessories
+icon: apprenticecodex:spellcaster_quiver
+sortnum: 21
+pages:
+  - source: 00-spotlight.md

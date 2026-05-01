@@ -2,6 +2,6 @@ id: protection_spell_supporter
 name: 保護術式補助具
 category: equipment_and_accessories
 icon: apprenticecodex:protection_spell_supporter
-sortnum: 5
+sortnum: 12
 pages:
   - source: 00-spotlight.md

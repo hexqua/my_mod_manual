@@ -1,0 +1,7 @@
+id: mana_shield_charm
+name: マナ障壁の護符
+category: equipment_and_accessories
+icon: apprenticecodex:mana_shield_charm
+sortnum: 17
+pages:
+  - source: 00-spotlight.md

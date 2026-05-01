@@ -2,6 +2,6 @@ id: ender_grimoire
 name: エンダーグリモア
 category: equipment_and_accessories
 icon: apprenticecodex:ender_grimoire
-sortnum: 8
+sortnum: 30
 pages:
   - source: 00-spotlight.md

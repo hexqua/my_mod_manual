@@ -1,0 +1,7 @@
+id: enchanted_circlet
+name: 呪紋のサークレット
+category: equipment_and_accessories
+icon: apprenticecodex:enchanted_circlet
+sortnum: 15
+pages:
+  - source: 00-spotlight.md
